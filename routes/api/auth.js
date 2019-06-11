@@ -3,6 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const config = require("config")
 const jwt = require("jsonwebtoken")
+const auth = require('../../middleware/auth')
 
 const User = require('../../models/User')
 
@@ -19,7 +20,7 @@ router.post('/', (req, res)=>{
     // Check for existing user
     User.findOne({ email })
     .then(user => {
-        if(!user) return res.status(400).json({ msg: 'User does not exist' })
+        if(!user) return res.status(400).json({ msg:'Invalid credentials' })
 
         // Validate password
 
@@ -47,6 +48,17 @@ router.post('/', (req, res)=>{
 
     })
 })
+
+// @route GET api/auth/user
+// @desc Get user data
+// @access Private
+
+router.get('/user', auth, (req, res) => {
+    User.findById(req.user.id)
+        .select(('-password'))
+        .then(user => res.json(user))
+})
+
 
 
 module.exports = router
