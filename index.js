@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const notes = require('./routes/api/notes');
+const todos = require('./routes/api/todos');
 
 const app = express();
 
@@ -18,6 +19,8 @@ mongoose
 // Routes
 
 app.use('/api/notes', notes);
+
+app.use('/api/todos', todos);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log('server start');
