@@ -6,7 +6,7 @@ const notes = require('./routes/api/notes')
 const users = require('./routes/api/users')
 const auth = require('./routes/api/auth')
 
-const app = express()
+const app = express();
 
 // Bodyparser Middleware
 app.use(express.json())
@@ -22,13 +22,14 @@ mongoose
 .then(()=>console.log("connect to mongoDB"))
 .catch(err => console.log(err))
 
+// Routes
 
-//Routes
+app.use('/api/notes', notes);
 
 app.use('/api/notes', notes)
 app.use('/api/users', users)
 app.use('/api/auth', auth)
 
 app.listen(process.env.PORT || 5000, () => {
-    console.log('server start')
-})
+  console.log('server start');
+});
