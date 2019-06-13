@@ -42,7 +42,7 @@ export default function Sidebar() {
         Dashboard
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Inbox', 'Starred', 'Send email', 'Drafts'].map(text => (
             <ListItem button key={text}>
               <ListItemText primary={text} />
             </ListItem>

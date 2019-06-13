@@ -9,7 +9,7 @@ import Form from '../../components/Form';
 import FormTextField from '../../components/FormTextField';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
-export default function RegistrationPage() {
+export default function LoginPage() {
   const theme = useContext(ThemeContext);
   const useStyles = makeStyles(() => ({
     root: {
@@ -21,13 +21,11 @@ export default function RegistrationPage() {
       color: theme.primary,
     },
   }));
-
   const classes = useStyles();
+
   const [value, setValue] = useState({
     name: '',
-    email: '',
     password: '',
-    confirmation: '',
   });
 
   const handleChange = title => e => {
@@ -35,31 +33,19 @@ export default function RegistrationPage() {
   };
 
   const handleSubmit = () => {
-    const validName = value.name.length > 2;
-    const validPassword = value.password.length > 4;
-    const validEmail =
-      value.email.length > 5 &&
-      value.email.includes('@') &&
-      value.email.includes('.');
-    if (
-      validName &&
-      validEmail &&
-      validPassword &&
-      value.confirmation === value.password
-    ) {
+    if (value.name && value.password) {
       console.log('submitted');
     } else console.log('errors');
   };
-  // eslint-disable-next-line react/prop-types
   return (
     <div>
       <Helmet>
-        <title>Registration</title>
+        <title>Login</title>
       </Helmet>
       <Navbar />
       <Container className={classes.root}>
-        <h1 className={classes.h1}>REGISTRATION</h1>
-        <Form onSubmit={handleSubmit} buttonName="REGISTRATION">
+        <h1 className={classes.h1}>LOGIN</h1>
+        <Form onSubmit={handleSubmit} buttonName="LOGIN">
           <FormTextField
             id="name"
             label="Name"
@@ -67,22 +53,10 @@ export default function RegistrationPage() {
             onChange={handleChange('name')}
           />
           <FormTextField
-            id="email"
-            label="Email"
-            value={value.email}
-            onChange={handleChange('email')}
-          />
-          <FormTextField
             id="password"
             label="Password"
             value={value.password}
             onChange={handleChange('password')}
-          />
-          <FormTextField
-            id="confirmation"
-            label="Confirm Password"
-            value={value.confirmation}
-            onChange={handleChange('confirmation')}
           />
         </Form>
       </Container>
