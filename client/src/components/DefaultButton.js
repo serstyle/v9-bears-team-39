@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 
 export default function OutlinedButtons(props) {
   // eslint-disable-next-line react/prop-types
-  const { name, onClick, variant, color, className, size } = props;
+  const { name, onClick, variant, color, className, size, icon } = props;
   return (
     <Button
       variant={variant}
@@ -12,6 +12,7 @@ export default function OutlinedButtons(props) {
       className={className}
       size={size}
     >
+      {icon}
       {name}
     </Button>
   );

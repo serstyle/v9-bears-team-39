@@ -2,38 +2,47 @@ import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import DefaultButton from './DefaultButton';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { GitlabIcon, GithubIcon, GoogleIcon } from '../assets/icons';
 
 export default function OAuthButtons(props) {
-  const theme = useContext(ThemeContext);
-  const useStyles = makeStyles(() => ({
+  const themeContext = useContext(ThemeContext);
+  const useStyles = makeStyles(theme => ({
     root: {
       marginTop: '50px',
     },
     github: {
-      backgroundColor: theme.github,
+      backgroundColor: themeContext.github,
       '&:hover': {
-        backgroundColor: theme.github,
+        backgroundColor: themeContext.github,
       },
-      color: theme.textWhite,
+      color: themeContext.textWhite,
       marginBottom: 20,
       width: '-webkit-fill-available',
     },
     gitlab: {
-      backgroundColor: theme.gitlab,
+      backgroundColor: themeContext.gitlab,
       '&:hover': {
-        backgroundColor: theme.gitlab,
+        backgroundColor: themeContext.gitlab,
       },
-      color: theme.textWhite,
+      color: themeContext.textWhite,
       marginBottom: 20,
       width: '-webkit-fill-available',
     },
     google: {
-      backgroundColor: theme.google,
+      backgroundColor: themeContext.google,
       '&:hover': {
-        backgroundColor: theme.google,
+        backgroundColor: themeContext.google,
       },
-      color: theme.textWhite,
+      color: themeContext.textWhite,
+      marginBottom: 20,
       width: '-webkit-fill-available',
+    },
+    icon: {
+      marginRight: 20,
+      paddingTop: 5,
+      [theme.breakpoints.down('xs')]: {
+        marginRight: 10,
+      },
     },
   }));
 
@@ -45,24 +54,24 @@ export default function OAuthButtons(props) {
     <div className={classes.root}>
       <DefaultButton
         name={titleGithub}
+        icon={<div className={classes.icon}>{GithubIcon}</div>}
         onClick={onSubmit}
         className={classes.github}
         variant="contained"
-        size="large"
       />
       <DefaultButton
         name={titleGitlab}
+        icon={<div className={classes.icon}>{GitlabIcon}</div>}
         onClick={onSubmit}
         className={classes.gitlab}
         variant="contained"
-        size="large"
       />
       <DefaultButton
         name={titleGoogle}
+        icon={<div className={classes.icon}>{GoogleIcon}</div>}
         onClick={onSubmit}
         className={classes.google}
         variant="contained"
-        size="large"
       />
     </div>
   );

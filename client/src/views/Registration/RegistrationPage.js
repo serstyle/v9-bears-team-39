@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar';
 import Form from '../../components/Form';
 import FormTextField from '../../components/FormTextField';
 import { ThemeContext } from '../../contexts/ThemeContext';
+// eslint-disable-next-line import/no-named-as-default
 import OAuthButtons from '../../components/OAuthButtons';
 
 export default function RegistrationPage() {
