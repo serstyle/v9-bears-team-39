@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -8,34 +8,38 @@ import Container from '@material-ui/core/Container';
 // component
 import Navbar from '../../components/Navbar';
 import DefaultButton from '../../components/DefaultButton';
-
-const useStyles = makeStyles(() => ({
-  container: {
-    paddingTop: '20px',
-    height: '90vh',
-    marginTop: '5%',
-  },
-  title: {
-    textAlign: 'left',
-    color: '#2D9CDB',
-    textTransform: 'uppercase',
-    fontSize: '2.5rem',
-    marginBottom: 0,
-  },
-  descriptionText: {
-    maxWidth: '50%',
-    textAlign: 'left',
-    color: '#2D9CDB',
-    textTransform: 'uppercase',
-    fontSize: '1.7rem',
-    marginTop: '10px',
-  },
-  link: {
-    textDecoration: 'none',
-  },
-}));
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 export default function HomePage() {
+  const theme = useContext(ThemeContext);
+  const useStyles = makeStyles(() => ({
+    container: {
+      paddingTop: '20px',
+      height: '90vh',
+      marginTop: '5%',
+    },
+    title: {
+      textAlign: 'left',
+      color: '#2D9CDB',
+      textTransform: 'uppercase',
+      fontSize: '2.5rem',
+      marginBottom: 0,
+    },
+    descriptionText: {
+      maxWidth: '50%',
+      textAlign: 'left',
+      color: '#2D9CDB',
+      textTransform: 'uppercase',
+      fontSize: '1.7rem',
+      marginTop: '10px',
+    },
+    link: {
+      textDecoration: 'none',
+    },
+    button: {
+      color: theme.primary,
+    },
+  }));
   const classes = useStyles();
   return (
     <div>
@@ -49,7 +53,11 @@ export default function HomePage() {
           Start to organize and enhance your developper carreer
         </h2>
         <Link className={classes.link} to="register-page">
-          <DefaultButton name="Get Started" />
+          <DefaultButton
+            name="Get Started"
+            variant="outlined"
+            className={classes.button}
+          />
         </Link>
       </Container>
     </div>
