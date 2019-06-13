@@ -9,22 +9,22 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    background: '#2D9CDB',
-  },
-  toolbar: theme.mixins.toolbar,
-}));
-
 export default function Sidebar() {
+  const useStyles = makeStyles(materialTheme => ({
+    root: {
+      display: 'flex',
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+      background: 'white',
+      color: 'black',
+    },
+    toolbar: materialTheme.mixins.toolbar,
+  }));
   const classes = useStyles();
 
   return (
@@ -42,11 +42,12 @@ export default function Sidebar() {
         Dashboard
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map(text => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="My Account" />
+          </ListItem>
         </List>
       </Drawer>
     </div>
