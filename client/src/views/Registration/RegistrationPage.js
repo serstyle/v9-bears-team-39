@@ -8,17 +8,30 @@ import Navbar from '../../components/Navbar';
 import Form from '../../components/Form';
 import FormTextField from '../../components/FormTextField';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import OAuthButtons from '../../components/OAuthButtons';
 
 export default function RegistrationPage() {
-  const theme = useContext(ThemeContext);
-  const useStyles = makeStyles(() => ({
-    root: {
+  const themeContext = useContext(ThemeContext);
+  const useStyles = makeStyles(theme => ({
+    mainContainer: {
       marginTop: '50px',
-      height: '50vh',
+      textAlign: 'center',
+      display: 'flex',
+      flexDirection: 'row',
+      [theme.breakpoints.down('xs')]: {
+        flexWrap: 'wrap',
+      },
+    },
+    titleContainer: {
+      marginTop: '50px',
+    },
+    formContainer: {
+      display: 'flex',
+      flexDirection: 'column',
     },
     h1: {
       textAlign: 'left',
-      color: theme.primary,
+      color: themeContext.primary,
     },
   }));
 
@@ -57,34 +70,43 @@ export default function RegistrationPage() {
         <title>Registration</title>
       </Helmet>
       <Navbar />
-      <Container className={classes.root}>
+      <Container className={classes.titleContainer}>
         <h1 className={classes.h1}>REGISTRATION</h1>
-        <Form onSubmit={handleSubmit} buttonName="REGISTRATION">
-          <FormTextField
-            id="name"
-            label="Name"
-            value={value.name}
-            onChange={handleChange('name')}
+        <Container className={classes.mainContainer}>
+          <Container className={classes.formContainer}>
+            <Form onSubmit={handleSubmit} buttonName="REGISTRATION">
+              <FormTextField
+                id="name"
+                label="Name"
+                value={value.name}
+                onChange={handleChange('name')}
+              />
+              <FormTextField
+                id="email"
+                label="Email"
+                value={value.email}
+                onChange={handleChange('email')}
+              />
+              <FormTextField
+                id="password"
+                label="Password"
+                value={value.password}
+                onChange={handleChange('password')}
+              />
+              <FormTextField
+                id="confirmation"
+                label="Confirm Password"
+                value={value.confirmation}
+                onChange={handleChange('confirmation')}
+              />
+            </Form>
+          </Container>
+          <OAuthButtons
+            titleGithub="Register with Github"
+            titleGitlab="Register with Gitlab"
+            titleGoogle="Register with Google"
           />
-          <FormTextField
-            id="email"
-            label="Email"
-            value={value.email}
-            onChange={handleChange('email')}
-          />
-          <FormTextField
-            id="password"
-            label="Password"
-            value={value.password}
-            onChange={handleChange('password')}
-          />
-          <FormTextField
-            id="confirmation"
-            label="Confirm Password"
-            value={value.confirmation}
-            onChange={handleChange('confirmation')}
-          />
-        </Form>
+        </Container>
       </Container>
     </div>
   );

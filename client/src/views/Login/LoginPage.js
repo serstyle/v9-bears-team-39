@@ -8,21 +8,34 @@ import Navbar from '../../components/Navbar';
 import Form from '../../components/Form';
 import FormTextField from '../../components/FormTextField';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import OAuthButtons from '../../components/OAuthButtons';
 
 export default function LoginPage() {
-  const theme = useContext(ThemeContext);
-  const useStyles = makeStyles(() => ({
-    root: {
+  const themeContext = useContext(ThemeContext);
+  const useStyles = makeStyles(theme => ({
+    mainContainer: {
       marginTop: '50px',
-      height: '50vh',
+      textAlign: 'center',
+      display: 'flex',
+      flexDirection: 'row',
+      [theme.breakpoints.down('xs')]: {
+        flexWrap: 'wrap',
+      },
+    },
+    titleContainer: {
+      marginTop: '50px',
+    },
+    formContainer: {
+      display: 'flex',
+      flexDirection: 'column',
     },
     h1: {
       textAlign: 'left',
-      color: theme.primary,
+      color: themeContext.primary,
     },
   }));
-  const classes = useStyles();
 
+  const classes = useStyles();
   const [value, setValue] = useState({
     name: '',
     password: '',
@@ -37,28 +50,38 @@ export default function LoginPage() {
       console.log('submitted');
     } else console.log('errors');
   };
+  // eslint-disable-next-line react/prop-types
   return (
     <div>
       <Helmet>
         <title>Login</title>
       </Helmet>
       <Navbar />
-      <Container className={classes.root}>
+      <Container className={classes.titleContainer}>
         <h1 className={classes.h1}>LOGIN</h1>
-        <Form onSubmit={handleSubmit} buttonName="LOGIN">
-          <FormTextField
-            id="name"
-            label="Name"
-            value={value.name}
-            onChange={handleChange('name')}
+        <Container className={classes.mainContainer}>
+          <Container className={classes.formContainer}>
+            <Form onSubmit={handleSubmit} buttonName="LOGIN">
+              <FormTextField
+                id="name"
+                label="Name"
+                value={value.name}
+                onChange={handleChange('name')}
+              />
+              <FormTextField
+                id="password"
+                label="Password"
+                value={value.password}
+                onChange={handleChange('password')}
+              />
+            </Form>
+          </Container>
+          <OAuthButtons
+            titleGithub="Sign in with Github"
+            titleGitlab="Sign in with Gitlab"
+            titleGoogle="Sign in with Google"
           />
-          <FormTextField
-            id="password"
-            label="Password"
-            value={value.password}
-            onChange={handleChange('password')}
-          />
-        </Form>
+        </Container>
       </Container>
     </div>
   );

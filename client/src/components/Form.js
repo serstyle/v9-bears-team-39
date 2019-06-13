@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 // Styling
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import FormButton from './FormButton';
+import DefaultButton from './DefaultButton';
 import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function Form(props) {
@@ -12,12 +12,6 @@ export default function Form(props) {
       padding: '10px',
       background: themeContext.primary,
       textAlign: 'center',
-      maxWidth: '40%',
-      marginLeft: 40,
-      [theme.breakpoints.down('sm')]: {
-        maxWidth: '100vw',
-        marginLeft: 'auto',
-      },
     },
     form: {
       display: 'flex',
@@ -29,6 +23,9 @@ export default function Form(props) {
       width: '-webkit-fill-available',
       backgroundColor: '#ffffff',
     },
+    button: {
+      marginBottom: 10,
+    },
   }));
   const classes = useStyles();
   // eslint-disable-next-line react/prop-types
@@ -38,7 +35,14 @@ export default function Form(props) {
       <form className={classes.form} noValidate autoComplete="off">
         {children}
       </form>
-      <FormButton name={buttonName} onSubmit={onSubmit} />
+      <DefaultButton
+        name={buttonName}
+        onClick={onSubmit}
+        className={classes.button}
+        variant="contained"
+        color="secondary"
+        size="large"
+      />
     </Container>
   );
 }

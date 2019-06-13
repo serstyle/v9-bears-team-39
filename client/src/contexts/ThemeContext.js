@@ -10,6 +10,7 @@ export default function ThemeContextProvider(props) {
     gitlab: '#FCA326',
     github: '#333333',
     google: '#DD4B39',
+    textWhite: '#ffffff',
   });
   // eslint-disable-next-line react/prop-types
   const { children } = props;
