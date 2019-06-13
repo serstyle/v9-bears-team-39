@@ -2,11 +2,16 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+
+// style
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
+// components
+import ListItems from './ListItems';
+// context
 import { ThemeContext } from '../contexts/ThemeContext';
 
 function TabContainer(props) {
@@ -24,12 +29,16 @@ export default function SimpleTabs() {
       flexGrow: 1,
       backgroundColor: materialTheme.palette.background.paper,
       // size of the sidebar
-      marginLeft: '240px',
+      marginLeft: '0px',
+      [materialTheme.breakpoints.up('sm')]: {
+        marginLeft: '240px',
+      },
     },
     appbar: {
       background: 'white',
       color: theme.primary,
     },
+    indicateBg: { background: theme.primary },
   }));
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -41,15 +50,40 @@ export default function SimpleTabs() {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="Item One" />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
+        <Tabs
+          classes={{ indicator: classes.indicateBg }}
+          value={value}
+          onChange={handleChange}
+        >
+          <Tab label="My Todo" />
+          <Tab label="My Notes" />
+          <Tab label="My Wiki's" />
         </Tabs>
       </AppBar>
-      {value === 0 && <TabContainer>Item One</TabContainer>}
-      {value === 1 && <TabContainer>Item Two</TabContainer>}
-      {value === 2 && <TabContainer>Item Three</TabContainer>}
+      {value === 0 && (
+        <TabContainer>
+          <ListItems
+            todo
+            list={['todo1', 'todo2', 'todo3', 'todo4', 'todo5']}
+          />
+        </TabContainer>
+      )}
+      {value === 1 && (
+        <TabContainer>
+          <ListItems
+            todo={false}
+            list={['Note1', 'Note2', 'Note3', 'Note4', 'Note5']}
+          />
+        </TabContainer>
+      )}
+      {value === 2 && (
+        <TabContainer>
+          <ListItems
+            todo={false}
+            list={['Wiki1', 'Wiki2', 'Wiki3', 'Wiki4', 'Wiki5']}
+          />
+        </TabContainer>
+      )}
     </div>
   );
 }

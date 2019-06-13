@@ -9,7 +9,6 @@ export default function Dashboard() {
     <div>
       <Sidebar />
       <SimpleTabs />
-      Hello
     </div>
   );
 }
