@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { makeStyles } from '@material-ui/core/styles';
 // style
@@ -7,19 +7,20 @@ import Container from '@material-ui/core/Container';
 import Navbar from '../../components/Navbar';
 import Form from '../../components/Form';
 import FormTextField from '../../components/FormTextField';
-
-const useStyles = makeStyles(() => ({
-  root: {
-    marginTop: '50px',
-    height: '50vh',
-  },
-  h1: {
-    textAlign: 'left',
-    color: '#2D9CDB',
-  },
-}));
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 export default function LoginPage() {
+  const theme = useContext(ThemeContext);
+  const useStyles = makeStyles(() => ({
+    root: {
+      marginTop: '50px',
+      height: '50vh',
+    },
+    h1: {
+      textAlign: 'left',
+      color: theme.primary,
+    },
+  }));
   const classes = useStyles();
 
   const [value, setValue] = useState({
