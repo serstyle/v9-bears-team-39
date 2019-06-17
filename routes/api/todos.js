@@ -35,6 +35,7 @@ router.delete('/:id', auth, (req, res) => {
     .catch(err => res.status(400).json({ success: false }));
 });
 
+// only good user should be able to put
 router.put('/:id', auth, (req, res) => {
   Todo.findById(req.params.id).then(todo => {
     if (todo.completed) {
