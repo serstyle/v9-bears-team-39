@@ -19,6 +19,7 @@ mongoose
   .connect(db, {
     useNewUrlParser: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   }) // Adding new Mongo url parser
   .then(() => console.log('connect to mongoDB'))
   .catch(err => console.log(err));
