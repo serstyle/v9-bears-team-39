@@ -6,6 +6,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import Preloader from './Preloader';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,32 +38,57 @@ export default function CheckboxList(props) {
     setChecked(newChecked);
   };
 
-  const listPropsTitle = props.list;
-
   return (
     <List className={classes.root}>
-      {[0, 1, 2, 3].map((value, i) => (
-        <ListItem
-          key={value}
-          role={undefined}
-          dense
-          button
-          onClick={handleToggle(value)}
-        >
-          <ListItemText
-            style={
-              props.todo
-                ? checked.indexOf(value) !== -1
+      {props.list.map((value, i) =>
+        props.todo ? (
+          <ListItem
+            key={i}
+            role={undefined}
+            dense
+            button
+            onClick={handleToggle(i)}
+          >
+            <ListItemText
+              style={
+                checked.indexOf(i) !== -1
                   ? { textDecoration: 'line-through' }
                   : { textDecoration: 'none' }
-                : null
-            }
-            id={i}
-            primary={listPropsTitle[i]}
-            secondary={listPropsTitle[i]}
-          />
-        </ListItem>
-      ))}
+              }
+              id={i}
+              primary={value.title}
+              secondary={value.started}
+            />
+            {props.pending ? (
+              <ListItemSecondaryAction>
+                <Preloader size={30} />
+              </ListItemSecondaryAction>
+            ) : (
+              <ListItemSecondaryAction
+                onClick={() => props.handleDelete(value._id)}
+              >
+                <IconButton edge="end" aria-label="Delete">
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            )}
+          </ListItem>
+        ) : (
+          <ListItem
+            key={i}
+            role={undefined}
+            dense
+            button
+            onClick={handleToggle(i)}
+          >
+            <ListItemText
+              id={i}
+              primary={value.title}
+              secondary={value.title}
+            />
+          </ListItem>
+        )
+      )}
     </List>
   );
 }

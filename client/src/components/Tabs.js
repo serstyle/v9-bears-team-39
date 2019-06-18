@@ -7,10 +7,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+
 import Typography from '@material-ui/core/Typography';
 
 // components
 import ListItems from './ListItems';
+import TodoList from './TodoList';
 // context
 import { ThemeContext } from '../contexts/ThemeContext';
 
@@ -21,9 +23,11 @@ function TabContainer(props) {
     </Typography>
   );
 }
-
 export default function SimpleTabs() {
+  const token = localStorage.getItem('token');
+
   const theme = useContext(ThemeContext);
+
   const useStyles = makeStyles(materialTheme => ({
     root: {
       flexGrow: 1,
@@ -46,7 +50,6 @@ export default function SimpleTabs() {
   function handleChange(event, newValue) {
     setValue(newValue);
   }
-
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
@@ -62,17 +65,20 @@ export default function SimpleTabs() {
       </AppBar>
       {value === 0 && (
         <TabContainer>
-          <ListItems
-            todo
-            list={['todo1', 'todo2', 'todo3', 'todo4', 'todo5']}
-          />
+          <TodoList token={token} />
         </TabContainer>
       )}
       {value === 1 && (
         <TabContainer>
           <ListItems
             todo={false}
-            list={['Note1', 'Note2', 'Note3', 'Note4', 'Note5']}
+            list={[
+              { title: 'note1' },
+              { title: 'note2' },
+              { title: 'note3' },
+              { title: 'note4' },
+              { title: 'note5' },
+            ]}
           />
         </TabContainer>
       )}
