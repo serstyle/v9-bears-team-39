@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { makeStyles } from '@material-ui/core/styles';
 // style
@@ -14,7 +14,7 @@ import AuthContext from '../../contexts/auth/authContext';
 
 export default function RegistrationPage(props) {
   const authContext = useContext(AuthContext);
-  const { register } = authContext;
+  const { register, isAuthenticated, error } = authContext;
   const themeContext = useContext(ThemeContext);
   const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -40,6 +40,19 @@ export default function RegistrationPage(props) {
   }));
 
   const classes = useStyles();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      // eslint-disable-next-line react/prop-types
+      props.history.push('/');
+    }
+
+    if (error === 'User already exists') {
+      alert(error, 'danger');
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
+
   const [value, setValue] = useState({
     name: '',
     email: '',
@@ -68,14 +81,13 @@ export default function RegistrationPage(props) {
       validEmail &&
       validPassword &&
       confirmation === password
-    ) {
+    )
       register({
         name,
         email,
         password,
       });
-      console.log(value);
-    } else console.log('errors');
+    alert('success');
   };
   // eslint-disable-next-line react/prop-types
   return (

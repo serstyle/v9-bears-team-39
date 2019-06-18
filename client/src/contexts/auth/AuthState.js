@@ -6,9 +6,9 @@ import { REGISTER_SUCCESS, REGISTER_FAIL } from '../types';
 
 const AuthState = props => {
   const initialState = {
-    token: localStorage.getItem('token'),
     user: null,
     error: null,
+    isAuthenticated: null,
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -35,14 +35,13 @@ const AuthState = props => {
       });
     }
   };
+
   // eslint-disable-next-line react/prop-types
   const { children } = props;
   return (
     <AuthContext.Provider
       value={{
-        token: state.token,
         isAuthenticated: state.isAuthenticated,
-        loading: state.loading,
         user: state.user,
         error: state.error,
         register,
