@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { makeStyles } from '@material-ui/core/styles';
 // style
@@ -10,8 +10,11 @@ import FormTextField from '../../components/FormTextField';
 import { ThemeContext } from '../../contexts/ThemeContext';
 // eslint-disable-next-line import/no-named-as-default
 import OAuthButtons from '../../components/OAuthButtons';
+import AuthContext from '../../contexts/auth/authContext';
 
-export default function RegistrationPage() {
+export default function RegistrationPage(props) {
+  const authContext = useContext(AuthContext);
+  const { register, isAuthenticated, error } = authContext;
   const themeContext = useContext(ThemeContext);
   const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -37,6 +40,19 @@ export default function RegistrationPage() {
   }));
 
   const classes = useStyles();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      // eslint-disable-next-line react/prop-types
+      props.history.push('/');
+    }
+
+    if (error === 'User already exists') {
+      alert(error, 'danger');
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
+
   const [value, setValue] = useState({
     name: '',
     email: '',
@@ -44,25 +60,34 @@ export default function RegistrationPage() {
     confirmation: '',
   });
 
+  const { name, email, password, confirmation } = value;
+
   const handleChange = title => e => {
     setValue({ ...value, [title]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    const validName = value.name.length > 2;
-    const validPassword = value.password.length > 4;
+  const handleSubmit = e => {
+    e.preventDefault();
+    const validName = name.length > 2;
+    const validPassword = password.length > 4;
     const validEmail =
-      value.email.length > 5 &&
-      value.email.includes('@') &&
-      value.email.includes('.');
-    if (
+      email.length > 5 && email.includes('@') && email.includes('.');
+    if (name === '' || email === '' || password === '') {
+      alert('Plase fill all required fields');
+    } else if (password !== confirmation) {
+      alert('Passwords do not match');
+    } else if (
       validName &&
       validEmail &&
       validPassword &&
-      value.confirmation === value.password
-    ) {
-      console.log('submitted');
-    } else console.log('errors');
+      confirmation === password
+    )
+      register({
+        name,
+        email,
+        password,
+      });
+    alert('success');
   };
   // eslint-disable-next-line react/prop-types
   return (
@@ -79,25 +104,25 @@ export default function RegistrationPage() {
               <FormTextField
                 id="name"
                 label="Name"
-                value={value.name}
+                value={name}
                 onChange={handleChange('name')}
               />
               <FormTextField
                 id="email"
                 label="Email"
-                value={value.email}
+                value={email}
                 onChange={handleChange('email')}
               />
               <FormTextField
                 id="password"
                 label="Password"
-                value={value.password}
+                value={password}
                 onChange={handleChange('password')}
               />
               <FormTextField
                 id="confirmation"
                 label="Confirm Password"
-                value={value.confirmation}
+                value={confirmation}
                 onChange={handleChange('confirmation')}
               />
             </Form>
