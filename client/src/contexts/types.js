@@ -6,6 +6,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 // Auth
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const LOGOUT = 'LOGOUT';
 
 // Alert
 

@@ -15,7 +15,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import AuthContext from '../contexts/auth/authContext';
 // context
 import { ThemeContext } from '../contexts/ThemeContext';
 
@@ -23,14 +26,22 @@ const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
   const theme = useContext(ThemeContext);
+  const authContext = useContext(AuthContext);
+  const { logout } = authContext;
   const { container } = props;
 
   const themeMaterial = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  // Logout
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  // Style
   const useStyles = makeStyles(T => ({
     root: {
       display: 'flex',
+      justifyContent: 'space-between',
     },
     drawer: {
       [T.breakpoints.up('sm')]: {
@@ -66,6 +77,15 @@ export default function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   }
 
+  // Logout Menu
+  function handleMenu(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
+
   const drawer = (
     <div className={classes.root}>
       <CssBaseline />
@@ -96,7 +116,7 @@ export default function ResponsiveDrawer(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.root}>
           <IconButton
             color="inherit"
             aria-label="Open drawer"
@@ -109,6 +129,37 @@ export default function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap>
             Dev Dashboard
           </Typography>
+          <div>
+            <IconButton
+              aria-label="Account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>My Account</MenuItem>
+              <MenuItem onClick={logout} component={Link} to="/">
+                Logout
+              </MenuItem>
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="Mailbox folders">
