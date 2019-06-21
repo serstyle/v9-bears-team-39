@@ -7,6 +7,8 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 // Auth
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
+export const LOGIN_SUCCESS = 'LOGI_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
 
 // Alert
 
