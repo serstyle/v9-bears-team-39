@@ -47,14 +47,16 @@ router.post('/', (req, res) => {
   });
 });
 
-// @route GET api/auth/user
-// @desc Get user data
-// @access Private
-
-router.get('/user', auth, (req, res) => {
-  User.findById(req.user.id)
-    .select('-password')
-    .then(user => res.json(user));
+// @route     GET api/auth
+// @desc      Get logged in user
+// @access    Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
-
 module.exports = router;
