@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 // components
 import ListItems from './ListItems';
 import TodoList from './TodoList';
+import Modal from './Modal';
+import MyNotesForm from './MyNotesForm';
 // context
 import { ThemeContext } from '../contexts/ThemeContext';
 
@@ -70,6 +72,9 @@ export default function SimpleTabs() {
       )}
       {value === 1 && (
         <TabContainer>
+          <Modal name="Add Note">
+            <MyNotesForm />
+          </Modal>
           <ListItems
             todo={false}
             list={[

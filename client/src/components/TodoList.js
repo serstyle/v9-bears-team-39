@@ -57,11 +57,11 @@ export default function SimpleTabs(props) {
   // REDUCER FOR TODO
   const [state, dispatch] = useReducer(todoReducer, todoState);
   const { token } = props;
+  const userid = '5d0b62e2fa6d84195bce2888';
   // FETCH DATA
   useEffect(() => {
     dispatch({ type: 'GET_TODO_PENDING' });
-    const id = '5d0785bb6c544c211403e46e';
-    fetch(`/api/todos/${id}`, {
+    fetch(`/api/todos/${userid}`, {
       method: 'GET',
       headers: {
         'x-auth-token': token,
@@ -85,7 +85,7 @@ export default function SimpleTabs(props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userid: '5d0785bb6c544c211403e46e',
+        userid,
         title: state.todoInput,
       }),
     })
@@ -102,7 +102,7 @@ export default function SimpleTabs(props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userid: '5d0785bb6c544c211403e46e',
+        userid,
       }),
     })
       .then(res => res.json())
