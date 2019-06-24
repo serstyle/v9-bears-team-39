@@ -42,6 +42,7 @@ export default function CheckboxList(props) {
     <List className={classes.root}>
       {props.list.map((value, i) =>
         props.todo ? (
+          /* Todo */
           <ListItem
             key={i}
             role={undefined}
@@ -64,6 +65,7 @@ export default function CheckboxList(props) {
                 <Preloader size={30} />
               </ListItemSecondaryAction>
             ) : (
+              /* Not todo */
               <ListItemSecondaryAction
                 onClick={() => props.handleDelete(value._id)}
               >
