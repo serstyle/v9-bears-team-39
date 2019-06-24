@@ -2,9 +2,10 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useReducer, useContext } from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
 // style
 
-import Input from '@material-ui/core/Input';
+import FormTextField from './FormTextField';
 
 // components
 import ListItems from './ListItems';
@@ -54,6 +55,10 @@ const todoState = {
 
 export default function SimpleTabs(props) {
   const theme = useContext(ThemeContext);
+  const useStyles = makeStyles(materialTheme => ({
+    primary: { color: theme.primary },
+  }));
+  const classes = useStyles();
   // REDUCER FOR TODO
   const [state, dispatch] = useReducer(todoReducer, todoState);
   const { token } = props;
@@ -119,9 +124,9 @@ export default function SimpleTabs(props) {
         <Preloader size={25} />
       ) : (
         <form onSubmit={handleSubmit}>
-          <Input
+          <FormTextField
             // add theme primary for the focus or hover
-            placeholder="Add Todo"
+            label="Add Todo"
             value={state.todoInput}
             onChange={e =>
               dispatch({ type: 'HANDLE_INPUT', value: e.target.value })

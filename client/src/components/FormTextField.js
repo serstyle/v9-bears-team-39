@@ -11,13 +11,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function FormButton(props) {
-  const classes = useStyles();
+  const styles = useStyles();
   // eslint-disable-next-line react/prop-types
-  const { id, label, value, onChange } = props;
+  const { id, label, value, onChange, multiline, rows } = props;
   return (
     <TextField
-      className={classes.textField}
+      className={styles.textField}
       required
+      multiline={multiline}
+      rows={rows}
       id={id}
       label={label}
       value={value}

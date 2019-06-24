@@ -72,9 +72,6 @@ export default function SimpleTabs() {
       )}
       {value === 1 && (
         <TabContainer>
-          <Modal name="Add Note">
-            <MyNotesForm />
-          </Modal>
           <ListItems
             todo={false}
             list={[
@@ -85,6 +82,9 @@ export default function SimpleTabs() {
               { title: 'note5' },
             ]}
           />
+          <Modal name="Add Note">
+            <MyNotesForm />
+          </Modal>
         </TabContainer>
       )}
       {value === 2 && (
