@@ -61,8 +61,8 @@ export default function SimpleTabs(props) {
   const classes = useStyles();
   // REDUCER FOR TODO
   const [state, dispatch] = useReducer(todoReducer, todoState);
-  const { token } = props;
-  const userid = '5d0b62e2fa6d84195bce2888';
+  const { token, user } = props;
+  const userid = user._id;
   // FETCH DATA
   useEffect(() => {
     dispatch({ type: 'GET_TODO_PENDING' });
@@ -78,7 +78,7 @@ export default function SimpleTabs(props) {
         console.log(data);
         dispatch({ type: 'GET_TODO_SUCCESS', value: data });
       });
-  }, [token]);
+  }, [token, userid]);
 
   const handleSubmit = e => {
     e.preventDefault();
