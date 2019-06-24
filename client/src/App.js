@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Note from './components/Note';
@@ -16,7 +16,6 @@ if (localStorage.token) {
 }
 
 function App() {
-  useEffect(() => console.log('trigger'));
   return (
     <AuthState>
       <AlertState>
