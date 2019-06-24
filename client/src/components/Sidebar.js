@@ -62,7 +62,6 @@ export default function ResponsiveDrawer(props) {
         display: 'none',
       },
     },
-    toolbar: T.mixins.toolbar,
     drawerPaper: {
       color: 'white',
       background: theme.third,
@@ -104,7 +103,7 @@ export default function ResponsiveDrawer(props) {
           <ListItem button component={Link} to="dashboard">
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button component={Link} to="profile">
+          <ListItem button component={Link} to="/profile">
             <ListItemText primary="My Account" />
           </ListItem>
         </List>
@@ -154,7 +153,9 @@ export default function ResponsiveDrawer(props) {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>My Account</MenuItem>
+              <MenuItem component={Link} to="/profile">
+                My Account
+              </MenuItem>
               <MenuItem onClick={logout} component={Link} to="/">
                 Logout
               </MenuItem>

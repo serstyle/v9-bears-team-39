@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const auth = require('../../middleware/auth');
 
 const User = require('../../models/User');
 
@@ -48,6 +49,23 @@ router.post('/', (req, res) => {
       });
     });
   });
+});
+
+// @route PUT api/users/:id
+// @desc Update User
+// @access Private
+
+router.put('/:id', auth, async (req, res) => {
+  const updateProfile = {};
+  if (req.body.name) updateProfile.name = req.body.name;
+  if (req.body.email) updateProfile.email = req.body.email;
+  if (req.body.password) updateProfile.password = req.body.password;
+
+  User.findOneAndUpdate(
+    { _id: req.params.id, user: req.body.userid },
+    { $set: updateProfile },
+    { new: true }
+  ).then(user => res.json(user));
 });
 
 module.exports = router;

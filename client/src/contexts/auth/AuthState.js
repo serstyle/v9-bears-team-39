@@ -12,6 +12,8 @@ import {
   LOGOUT,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  PROFILE_UPDATED,
+  PROFILE_UPDATE_FAILED,
 } from '../types';
 
 const AuthState = props => {
@@ -22,7 +24,6 @@ const AuthState = props => {
     user: null,
     error: null,
   };
-
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Load User
@@ -93,6 +94,32 @@ const AuthState = props => {
     }
   };
 
+  // Update User info
+
+  const updateUser = async formData => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.put(`/api/users/${state.user}`, formData, config);
+      console.log(state.user.id);
+      dispatch({
+        type: PROFILE_UPDATED,
+        payload: res.data,
+      });
+
+      loadUser();
+    } catch (err) {
+      dispatch({
+        type: PROFILE_UPDATE_FAILED,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Logout
   const logout = () => dispatch({ type: LOGOUT });
 
@@ -113,6 +140,7 @@ const AuthState = props => {
         clearErrors,
         logout,
         login,
+        updateUser,
       }}
     >
       {children}

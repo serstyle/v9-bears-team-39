@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 
 // component
-import Navbar from '../../components/Navbar';
 import DefaultButton from '../../components/DefaultButton';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
@@ -46,7 +45,6 @@ export default function HomePage() {
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <Navbar />
       <Container className={classes.container}>
         <h1 className={classes.title}>Dev Dashboard</h1>
         <h2 className={classes.descriptionText}>
