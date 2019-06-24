@@ -9,6 +9,7 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   CLEAR_ERRORS,
+  LOGOUT,
 } from '../types';
 
 const AuthState = props => {
@@ -65,6 +66,9 @@ const AuthState = props => {
     }
   };
 
+  // Logout
+  const logout = () => dispatch({ type: LOGOUT });
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
   // eslint-disable-next-line react/prop-types
@@ -80,6 +84,7 @@ const AuthState = props => {
         register,
         loadUser,
         clearErrors,
+        logout,
       }}
     >
       {children}
