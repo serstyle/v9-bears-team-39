@@ -11,10 +11,14 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 // eslint-disable-next-line import/no-named-as-default
 import OAuthButtons from '../../components/OAuthButtons';
 import AuthContext from '../../contexts/auth/authContext';
+import AlertContext from '../../contexts/alert/alertContext';
+import Alert from '../../components/Alert';
 
 export default function RegistrationPage(props) {
+  const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
-  const { register, isAuthenticated, error } = authContext;
+  const { register, isAuthenticated, error, clearErrors } = authContext;
+  const { setAlert } = alertContext;
   const themeContext = useContext(ThemeContext);
   const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -44,11 +48,12 @@ export default function RegistrationPage(props) {
   useEffect(() => {
     if (isAuthenticated) {
       // eslint-disable-next-line react/prop-types
-      props.history.push('/');
+      props.history.push('/dashboard');
     }
 
     if (error === 'User already exists') {
-      alert(error, 'danger');
+      setAlert(error, 'danger');
+      clearErrors();
     }
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
@@ -68,27 +73,20 @@ export default function RegistrationPage(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const validName = name.length > 2;
-    const validPassword = password.length > 4;
-    const validEmail =
-      email.length > 5 && email.includes('@') && email.includes('.');
     if (name === '' || email === '' || password === '') {
-      alert('Plase fill all required fields');
+      setAlert('Please enter all fields', 'danger');
     } else if (password !== confirmation) {
-      alert('Passwords do not match');
-    } else if (
-      validName &&
-      validEmail &&
-      validPassword &&
-      confirmation === password
-    )
+      setAlert('Passwords do not match', 'danger');
+    } else {
       register({
         name,
         email,
         password,
       });
-    alert('success');
+      // eslint-disable-next-line react/prop-types
+    }
   };
+
   // eslint-disable-next-line react/prop-types
   return (
     <div>
@@ -100,7 +98,12 @@ export default function RegistrationPage(props) {
         <h1 className={classes.h1}>REGISTRATION</h1>
         <Container className={classes.mainContainer}>
           <Container className={classes.formContainer}>
-            <Form onSubmit={handleSubmit} buttonName="REGISTRATION">
+            <Alert />
+            <Form
+              onSubmit={handleSubmit}
+              style={{ marginTop: 10 }}
+              buttonName="REGISTRATION"
+            >
               <FormTextField
                 id="name"
                 label="Name"
