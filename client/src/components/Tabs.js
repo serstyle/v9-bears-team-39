@@ -17,6 +17,7 @@ import Modal from './Modal';
 import MyNotesForm from './MyNotesForm';
 // context
 import { ThemeContext } from '../contexts/ThemeContext';
+import AuthContext from '../contexts/auth/authContext';
 
 function TabContainer(props) {
   return (
@@ -27,7 +28,7 @@ function TabContainer(props) {
 }
 export default function SimpleTabs() {
   const token = localStorage.getItem('token');
-
+  const authContext = useContext(AuthContext);
   const theme = useContext(ThemeContext);
 
   const useStyles = makeStyles(materialTheme => ({
@@ -67,7 +68,7 @@ export default function SimpleTabs() {
       </AppBar>
       {value === 0 && (
         <TabContainer>
-          <TodoList token={token} />
+          <TodoList user={authContext.user} token={token} />
         </TabContainer>
       )}
       {value === 1 && (
