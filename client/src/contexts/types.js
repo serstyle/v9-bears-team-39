@@ -9,6 +9,8 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
 export const LOGIN_SUCCESS = 'LOGI_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const PROFILE_UPDATED = 'PROFILE_UPDATED';
+export const PROFILE_UPDATE_FAILED = 'PROFILE_UPDATE_FAILED';
 
 // Alert
 

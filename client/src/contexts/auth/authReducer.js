@@ -7,6 +7,8 @@ import {
   LOGOUT,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  PROFILE_UPDATED,
+  PROFILE_UPDATE_FAILED,
 } from '../types';
 
 export default (state, action) => {
@@ -27,10 +29,18 @@ export default (state, action) => {
         isAuthenticated: true,
         loading: false,
       };
+    case PROFILE_UPDATED:
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+        loading: false,
+      };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
     case AUTH_ERROR:
     case LOGOUT:
+    case PROFILE_UPDATE_FAILED:
       localStorage.removeItem('token');
       return {
         ...state,

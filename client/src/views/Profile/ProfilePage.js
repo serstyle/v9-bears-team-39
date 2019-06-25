@@ -7,17 +7,17 @@ import Container from '@material-ui/core/Container';
 import Form from '../../components/Form';
 import FormTextField from '../../components/FormTextField';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import OAuthButtons from '../../components/OAuthButtons';
+// eslint-disable-next-line import/no-named-as-default
 import AuthContext from '../../contexts/auth/authContext';
 import AlertContext from '../../contexts/alert/alertContext';
 import Alert from '../../components/Alert';
 
-export default function LoginPage(props) {
-  const themeContext = useContext(ThemeContext);
+export default function ProfilePage(props) {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
-  const { login, isAuthenticated, error, clearErrors } = authContext;
+  const { updateUser, user } = authContext;
   const { setAlert } = alertContext;
+  const themeContext = useContext(ThemeContext);
   const useStyles = makeStyles(theme => ({
     mainContainer: {
       marginTop: '50px',
@@ -43,23 +43,13 @@ export default function LoginPage(props) {
 
   const classes = useStyles();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      // eslint-disable-next-line react/prop-types
-      props.history.push('/dashboard');
-    }
-
-    if (error === 'Invalid Creditentials') {
-      setAlert(error, 'danger');
-      clearErrors();
-    }
-    // eslint-disable-next-line
-  }, [clearErrors, error, isAuthenticated, props.history, setAlert]);
-
   const [value, setValue] = useState({
+    name: '',
     email: '',
     password: '',
   });
+
+  const { name, email, password } = value;
 
   const handleChange = title => e => {
     setValue({ ...value, [title]: e.target.value });
@@ -67,47 +57,49 @@ export default function LoginPage(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { email, password } = value;
-    if (email === '' || password === '') {
-      setAlert('Please fill in all fields', 'danger');
-    } else {
-      login({
-        email,
-        password,
-      });
-    }
+    updateUser({
+      name,
+      email,
+      password,
+    });
+    // eslint-disable-next-line react/prop-types
   };
-  // eslint-disable-next-line react/prop-types
+
   return (
     <div>
       <Helmet>
-        <title>Login</title>
+        <title>My Account</title>
       </Helmet>
       <Container className={classes.titleContainer}>
-        <h1 className={classes.h1}>LOGIN</h1>
+        <h1 className={classes.h1}>MY ACCOUNT</h1>
         <Container className={classes.mainContainer}>
           <Container className={classes.formContainer}>
             <Alert />
-            <Form onSubmit={handleSubmit} buttonName="LOGIN">
+            <Form
+              onSubmit={handleSubmit}
+              style={{ marginTop: 10 }}
+              buttonName="Save changes"
+            >
+              <FormTextField
+                id="name"
+                label="Update Name"
+                value={name}
+                onChange={handleChange('name')}
+              />
               <FormTextField
                 id="email"
-                label="Email"
-                value={value.email}
+                label="Update Email"
+                value={email}
                 onChange={handleChange('email')}
               />
               <FormTextField
                 id="password"
                 label="Password"
-                value={value.password}
+                value={password}
                 onChange={handleChange('password')}
               />
             </Form>
           </Container>
-          <OAuthButtons
-            titleGithub="Sign in with Github"
-            titleGitlab="Sign in with Gitlab"
-            titleGoogle="Sign in with Google"
-          />
         </Container>
       </Container>
     </div>

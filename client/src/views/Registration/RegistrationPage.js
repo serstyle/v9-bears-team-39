@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 // style
 import Container from '@material-ui/core/Container';
 // component
-import Navbar from '../../components/Navbar';
 import Form from '../../components/Form';
 import FormTextField from '../../components/FormTextField';
 import { ThemeContext } from '../../contexts/ThemeContext';
@@ -93,7 +92,6 @@ export default function RegistrationPage(props) {
       <Helmet>
         <title>Registration</title>
       </Helmet>
-      <Navbar />
       <Container className={classes.titleContainer}>
         <h1 className={classes.h1}>REGISTRATION</h1>
         <Container className={classes.mainContainer}>
