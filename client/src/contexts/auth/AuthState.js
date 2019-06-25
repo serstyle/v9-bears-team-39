@@ -34,7 +34,7 @@ const AuthState = props => {
 
     try {
       const res = await axios.get('/api/auth');
-
+      console.log(res.data);
       dispatch({
         type: USER_LOADED,
         payload: res.data,
@@ -104,7 +104,11 @@ const AuthState = props => {
     };
 
     try {
-      const res = await axios.put(`/api/users/${state.user}`, formData, config);
+      const res = await axios.put(
+        `/api/users/${state.user._id}`,
+        formData,
+        config
+      );
       console.log(state.user.id);
       dispatch({
         type: PROFILE_UPDATED,
