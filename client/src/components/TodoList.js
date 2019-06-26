@@ -54,19 +54,11 @@ const todoState = {
 };
 
 export default function SimpleTabs(props) {
-<<<<<<< HEAD
-  const theme = useContext(ThemeContext);
-  const useStyles = makeStyles(() => ({
-    primary: { color: theme.primary },
-  }));
-  const classes = useStyles();
-=======
   // const theme = useContext(ThemeContext);
   // const useStyles = makeStyles(materialTheme => ({
   //   primary: { color: theme.primary },
   // }));
   // const classes = useStyles();
->>>>>>> 30639525856204572708cb6617a7b9998c9aa843
   // REDUCER FOR TODO
   const [state, dispatch] = useReducer(todoReducer, todoState);
   const { token, user } = props;
