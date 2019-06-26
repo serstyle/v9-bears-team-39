@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-import React, { useEffect, useReducer, useContext } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 // style
 
 import FormTextField from './FormTextField';
@@ -11,7 +11,7 @@ import FormTextField from './FormTextField';
 import ListItems from './ListItems';
 import Preloader from './Preloader';
 // context
-import { ThemeContext } from '../contexts/ThemeContext';
+// import { ThemeContext } from '../contexts/ThemeContext';
 
 function todoReducer(state, action) {
   switch (action.type) {
@@ -54,18 +54,18 @@ const todoState = {
 };
 
 export default function SimpleTabs(props) {
-  const theme = useContext(ThemeContext);
-  const useStyles = makeStyles(materialTheme => ({
-    primary: { color: theme.primary },
-  }));
-  const classes = useStyles();
+  // const theme = useContext(ThemeContext);
+  // const useStyles = makeStyles(materialTheme => ({
+  //   primary: { color: theme.primary },
+  // }));
+  // const classes = useStyles();
   // REDUCER FOR TODO
   const [state, dispatch] = useReducer(todoReducer, todoState);
   const { token, user } = props;
   const userid = user._id;
   // FETCH DATA
   useEffect(() => {
-    console.log('test');
+    console.log(userid);
     dispatch({ type: 'GET_TODO_PENDING' });
     fetch(`/api/todos/${userid}`, {
       method: 'GET',

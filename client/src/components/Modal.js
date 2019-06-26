@@ -1,7 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 
@@ -33,7 +32,14 @@ function SimpleModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>{props.name}</Button>
+      <Button
+        className={props.button}
+        variant="contained"
+        color="secondary"
+        onClick={handleOpen}
+      >
+        {props.name}
+      </Button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
