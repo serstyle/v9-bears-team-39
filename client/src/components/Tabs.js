@@ -13,8 +13,7 @@ import Typography from '@material-ui/core/Typography';
 // components
 import ListItems from './ListItems';
 import TodoList from './TodoList';
-import Modal from './Modal';
-import MyNotesForm from './MyNotesForm';
+import Notes from './Note';
 // context
 import { ThemeContext } from '../contexts/ThemeContext';
 import AuthContext from '../contexts/auth/authContext';
@@ -57,6 +56,7 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Tabs
+          variant="fullWidth"
           classes={{ indicator: classes.indicateBg }}
           value={value}
           onChange={handleChange}
@@ -73,19 +73,7 @@ export default function SimpleTabs() {
       )}
       {value === 1 && (
         <TabContainer>
-          <ListItems
-            todo={false}
-            list={[
-              { title: 'note1' },
-              { title: 'note2' },
-              { title: 'note3' },
-              { title: 'note4' },
-              { title: 'note5' },
-            ]}
-          />
-          <Modal name="Add Note">
-            <MyNotesForm />
-          </Modal>
+          <Notes user={authContext.user} token={token} theme={theme} />
         </TabContainer>
       )}
       {value === 2 && (

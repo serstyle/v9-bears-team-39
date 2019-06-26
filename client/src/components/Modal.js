@@ -32,7 +32,14 @@ function SimpleModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>{props.name}</Button>
+      <Button
+        className={props.button}
+        variant="contained"
+        color="secondary"
+        onClick={handleOpen}
+      >
+        {props.name}
+      </Button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import AuthContext from '../contexts/auth/authContext';
 
 export default function useLoadUser() {

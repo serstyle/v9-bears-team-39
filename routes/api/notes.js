@@ -8,6 +8,7 @@ const Note = require('../../models/Note');
 // get all notes by id in params
 router.get('/:userid', auth, (req, res) => {
   Note.find({ user: req.params.userid })
+    .sort([['date', -1]])
     .then(notes => res.json(notes))
     .catch(() => res.status(400).json('id not found'));
 });
