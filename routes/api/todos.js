@@ -5,7 +5,9 @@ const auth = require('../../middleware/auth');
 const Todo = require('../../models/Todo');
 
 router.get('/:userid', auth, (req, res) => {
-  Todo.find({ user: req.params.userid }).then(todos => res.json(todos));
+  Todo.find({ user: req.params.userid })
+    .then(todos => res.json(todos))
+    .catch(err => console.log(err));
 });
 
 router.post('/', auth, (req, res) => {

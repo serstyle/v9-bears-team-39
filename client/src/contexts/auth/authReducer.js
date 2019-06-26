@@ -25,14 +25,14 @@ export default (state, action) => {
       localStorage.setItem('token', action.payload.token);
       return {
         ...state,
-        ...action.payload,
+        user: action.payload,
         isAuthenticated: true,
         loading: false,
       };
     case PROFILE_UPDATED:
       return {
         ...state,
-        ...action.payload,
+        user: { ...state.user, ...action.payload },
         isAuthenticated: true,
         loading: false,
       };

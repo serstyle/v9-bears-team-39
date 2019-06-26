@@ -31,7 +31,7 @@ function App() {
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/register-page" component={RegistrationPage} />
               <Route path="/login-page" component={LoginPage} />
-              <Route path="/profile" component={ProfilePage} />
+              <PrivateRoute path="/profile" component={ProfilePage} />
             </Switch>
           </BrowserRouter>
         </ThemeContextProvider>

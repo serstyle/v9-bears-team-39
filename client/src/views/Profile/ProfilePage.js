@@ -6,6 +6,8 @@ import Container from '@material-ui/core/Container';
 // component
 import Form from '../../components/Form';
 import FormTextField from '../../components/FormTextField';
+import Sidebar from '../../components/Sidebar';
+
 import { ThemeContext } from '../../contexts/ThemeContext';
 // eslint-disable-next-line import/no-named-as-default
 import AuthContext from '../../contexts/auth/authContext';
@@ -30,6 +32,11 @@ export default function ProfilePage(props) {
     },
     titleContainer: {
       marginTop: '50px',
+      // size of the sidebar but probleme size for the form
+      marginLeft: '0px',
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: '240px',
+      },
     },
     formContainer: {
       display: 'flex',
@@ -70,6 +77,7 @@ export default function ProfilePage(props) {
       <Helmet>
         <title>My Account</title>
       </Helmet>
+      <Sidebar />
       <Container className={classes.titleContainer}>
         <h1 className={classes.h1}>MY ACCOUNT</h1>
         <Container className={classes.mainContainer}>

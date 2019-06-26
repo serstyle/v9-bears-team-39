@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 export default function Navbar() {
   const classes = useStyles();
   const authContext = useContext(AuthContext);
-  const { logout, isAuthenticated } = authContext;
+  const { logout, isAuthenticated, loading } = authContext;
 
   // Logout
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -110,7 +110,7 @@ export default function Navbar() {
         <MenuItem component={Link} to="/profile">
           My Account
         </MenuItem>
-        <MenuItem component={Link} to="/notes">
+        <MenuItem component={Link} to="/">
           Logout
         </MenuItem>
       </Menu>
