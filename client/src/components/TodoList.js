@@ -55,7 +55,7 @@ const todoState = {
 
 export default function SimpleTabs(props) {
   const theme = useContext(ThemeContext);
-  const useStyles = makeStyles(materialTheme => ({
+  const useStyles = makeStyles(() => ({
     primary: { color: theme.primary },
   }));
   const classes = useStyles();

@@ -11,6 +11,7 @@ const Alerts = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      color: 'white',
     },
     success: {
       backgroundColor: theme.success,
@@ -32,9 +33,10 @@ const Alerts = () => {
     alertContext.alerts.map(alert => (
       <div
         key={alert.id}
-        className={`${classes.wrapper} +''+ ${classes.error}`}
+        className={`${classes.wrapper} +''+ ${classes[alert.type]}`}
       >
-        <InfoIcon className={classes.icon} /> {alert.msg}
+        <InfoIcon className={classes.icon} />
+        {alert.msg}
       </div>
     ))
   );

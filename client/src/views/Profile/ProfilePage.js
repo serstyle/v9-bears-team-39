@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { makeStyles } from '@material-ui/core/styles';
 // style
@@ -14,10 +14,10 @@ import AuthContext from '../../contexts/auth/authContext';
 import AlertContext from '../../contexts/alert/alertContext';
 import Alert from '../../components/Alert';
 
-export default function ProfilePage(props) {
+export default function ProfilePage() {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
-  const { updateUser, user } = authContext;
+  const { updateUser } = authContext;
   const { setAlert } = alertContext;
   const themeContext = useContext(ThemeContext);
   const useStyles = makeStyles(theme => ({
@@ -61,7 +61,6 @@ export default function ProfilePage(props) {
   const handleChange = title => e => {
     setValue({ ...value, [title]: e.target.value });
   };
-
   const handleSubmit = e => {
     e.preventDefault();
     updateUser({
@@ -69,6 +68,7 @@ export default function ProfilePage(props) {
       email,
       password,
     });
+    setAlert('Updated successfully', 'success');
     // eslint-disable-next-line react/prop-types
   };
 
