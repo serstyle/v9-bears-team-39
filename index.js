@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
-
+const morgan = require('morgan');
 const notes = require('./routes/api/notes');
 const todos = require('./routes/api/todos');
 const users = require('./routes/api/users');
@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 const db = config.get('mongoURI');
-
+app.use(morgan('combined'));
 // Connect to Mongo
 mongoose
   .connect(db, {
