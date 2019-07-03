@@ -35,7 +35,7 @@ router.post('/', auth, (req, res) => {
 router.delete('/:id', auth, (req, res) => {
   Note.findById(req.params.id)
     .then(note =>
-      note.userid === req.body.userid
+      note.user.toString() === req.body.userid
         ? note.remove().then(() => res.json({ success: true }))
         : res.status(400).json({ success: false })
     )
