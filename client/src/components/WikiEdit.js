@@ -9,7 +9,7 @@ import WikiContext from '../contexts/wikis/wikiContext';
 import AuthContext from '../contexts/auth/authContext';
 
 export default function WikiEdit(props) {
-  const useStyles = makeStyles(materialTheme => ({
+  const useStyles = makeStyles(() => ({
     root: {
       marginLeft: '0px',
     },
@@ -17,10 +17,11 @@ export default function WikiEdit(props) {
       textAlign: 'right',
     },
   }));
+
   const classes = useStyles();
 
   const wikiContext = useContext(WikiContext);
-  const { addWiki, current } = wikiContext;
+  const { addWiki, setCurrent, current, updateWiki } = wikiContext;
   const authContext = useContext(AuthContext);
   const { user } = authContext;
   const userid = user._id;
@@ -50,8 +51,13 @@ export default function WikiEdit(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addWiki(wiki);
+    if (current === null) {
+      addWiki(wiki);
+    } else {
+      updateWiki(wiki);
+    }
     props.save();
+    console.log(wiki);
   };
 
   marked.setOptions({
@@ -117,7 +123,7 @@ export default function WikiEdit(props) {
       </p>
       <div className={classes.button}>
         <DefaultButton
-          name="Save Wiki"
+          name={current ? 'Update Wiki' : 'Add Wiki'}
           variant="contained"
           color="secondary"
           onClick={handleSubmit}
