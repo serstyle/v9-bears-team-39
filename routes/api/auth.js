@@ -15,7 +15,7 @@ const User = require('../../models/User');
 router.post('/', (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).json({ msg: 'Please enter all fields' });
+    return res.status(400).json({ msg: 'Please enter all fields man' });
   }
 
   // Check for existing user

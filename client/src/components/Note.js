@@ -44,7 +44,6 @@ function Note(props) {
         },
       });
       const fetchNotes = await data.json();
-      console.log(fetchNotes);
       dispatch({ type: 'GET_NOTES_SUCCESS', value: fetchNotes });
     };
     fetchData();

@@ -22,6 +22,6 @@ const WikiSchema = new Schema({
   },
 });
 
-const Note = mongoose.model('note', WikiSchema);
+const Wiki = mongoose.model('wiki', WikiSchema);
 
-module.exports = Note;
+module.exports = Wiki;

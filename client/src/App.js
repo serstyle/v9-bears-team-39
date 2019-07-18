@@ -9,9 +9,11 @@ import Dashboard from './views/Dashboard/Dashboard';
 import ThemeContextProvider from './contexts/ThemeContext';
 import AuthState from './contexts/auth/AuthState';
 import AlertState from './contexts/alert/AlertState';
+import WikiState from './contexts/wikis/WikiState';
 import setAuthToken from './utils/setAuthToken';
 import ProfilePage from './views/Profile/ProfilePage';
 import NavBar from './components/Navbar';
+import WikiEdit from './components/WikiEdit';
 import PrivateRoute from './Routing/PrivateRoute';
 
 if (localStorage.token) {
@@ -22,6 +24,7 @@ function App() {
   return (
     <AuthState>
       <AlertState>
+        <WikiState>
         <ThemeContextProvider>
           <BrowserRouter>
             <NavBar />
@@ -31,10 +34,12 @@ function App() {
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/register-page" component={RegistrationPage} />
               <Route path="/login-page" component={LoginPage} />
+              <PrivateRoute path="/new-wiki" component={WikiEdit} />
               <PrivateRoute path="/profile" component={ProfilePage} />
             </Switch>
           </BrowserRouter>
         </ThemeContextProvider>
+        </WikiState>
       </AlertState>
     </AuthState>
   );
