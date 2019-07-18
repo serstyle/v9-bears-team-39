@@ -19,6 +19,14 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
+  item: {
+    backgroundColor: 'yellow',
+    height: 100
+  },
+  text: {
+    color: 'red',
+     backgroundColor: 'red',
+  }
 }));
 
 export default function CheckboxList(props) {
@@ -37,11 +45,11 @@ export default function CheckboxList(props) {
 
     setChecked(newChecked);
   };
-
+  const { list, todo, pending, handleDelete } = props;
   return (
     <List className={classes.root}>
-      {props.list.map((value, i) =>
-        props.todo ? (
+      {list.map((value, i) =>
+        todo ? (
           /* Todo */
           <ListItem
             key={i}
@@ -60,14 +68,14 @@ export default function CheckboxList(props) {
               primary={value.title}
               secondary={value.started}
             />
-            {props.pending ? (
+            {pending ? (
               <ListItemSecondaryAction>
                 <Preloader size={30} />
               </ListItemSecondaryAction>
             ) : (
               /* Not todo */
               <ListItemSecondaryAction
-                onClick={() => props.handleDelete(value._id)}
+                onClick={() => handleDelete(value._id)}
               >
                 <IconButton edge="end" aria-label="Delete">
                   <DeleteIcon />
@@ -77,14 +85,15 @@ export default function CheckboxList(props) {
           </ListItem>
         ) : (
           <React.Fragment key={i}>
-            <ListItem role={undefined} dense button onClick={handleToggle(i)}>
+            <ListItem className={classes.item} role={undefined} dense button onClick={handleToggle(i)}>
               <ListItemText
+              className={classes.text}
                 id={i}
                 primary={value.title}
                 secondary={value.body}
               />
             </ListItem>
-            {i !== props.list.length - 1 && <Divider light variant="middle" />}
+            {i !== list.length - 1 && <Divider light variant="middle" />}
           </React.Fragment>
         )
       )}

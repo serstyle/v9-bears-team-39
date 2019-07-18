@@ -65,7 +65,6 @@ export default function SimpleTabs(props) {
   const userid = user._id;
   // FETCH DATA
   useEffect(() => {
-    console.log(userid);
     dispatch({ type: 'GET_TODO_PENDING' });
     fetch(`/api/todos/${userid}`, {
       method: 'GET',
@@ -76,7 +75,6 @@ export default function SimpleTabs(props) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         dispatch({ type: 'GET_TODO_SUCCESS', value: data });
       })
       .catch(err => console.log(err));

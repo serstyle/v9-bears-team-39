@@ -16,3 +16,11 @@ export const PROFILE_UPDATE_FAILED = 'PROFILE_UPDATE_FAILED';
 
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
+
+// Wikis
+
+export const GET_WIKIS= 'GET_WIKIS';
+export const ADD_WIKI = 'ADD_WIKI';
+export const SET_CURRENT = 'SET_CURRENT';
+export const WIKI_ERROR = 'WIKI_ERROR';
+export const DELETE_WIKI = 'DELETE_WIKI';
