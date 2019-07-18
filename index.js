@@ -6,6 +6,7 @@ const notes = require('./routes/api/notes');
 const todos = require('./routes/api/todos');
 const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
+const wikis = require('./routes/api/wikis');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/api/todos', todos);
 app.use('/api/notes', notes);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use('/api/wikis', wikis);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log('server start');
