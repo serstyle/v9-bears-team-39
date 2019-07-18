@@ -7,11 +7,12 @@ import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function Form(props) {
   const themeContext = useContext(ThemeContext);
-  const useStyles = makeStyles(theme => ({
+  const useStyles = makeStyles(() => ({
     container: {
-      padding: '10px',
+      padding: 25,
       background: themeContext.primary,
       textAlign: 'center',
+      borderRadius: 5,
     },
     form: {
       display: 'flex',

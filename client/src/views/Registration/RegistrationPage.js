@@ -22,6 +22,7 @@ export default function RegistrationPage(props) {
   const useStyles = makeStyles(theme => ({
     mainContainer: {
       marginTop: '50px',
+      alignItems: 'center',
       textAlign: 'center',
       display: 'flex',
       flexDirection: 'row',

@@ -7,9 +7,6 @@ import { GitlabIcon, GithubIcon, GoogleIcon } from '../assets/icons';
 export default function OAuthButtons(props) {
   const themeContext = useContext(ThemeContext);
   const useStyles = makeStyles(theme => ({
-    root: {
-      marginTop: '50px',
-    },
     github: {
       backgroundColor: themeContext.github,
       '&:hover': {
@@ -44,6 +41,10 @@ export default function OAuthButtons(props) {
         marginRight: 10,
       },
     },
+    h5: {
+      fontWeight: 500,
+      color: themeContext.secondary,
+    },
   }));
 
   const classes = useStyles();
@@ -51,7 +52,8 @@ export default function OAuthButtons(props) {
   const { titleGithub, titleGitlab, titleGoogle, onSubmit } = props;
   // eslint-disable-next-line react/prop-types
   return (
-    <div className={classes.root}>
+    <div>
+      <h5 className={classes.h5}>Feature Under developement. Coming soon !</h5>
       <DefaultButton
         name={titleGithub}
         icon={<div className={classes.icon}>{GithubIcon}</div>}

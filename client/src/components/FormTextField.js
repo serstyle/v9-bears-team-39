@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
   textField: {
     width: '-webkit-fill-available',
     backgroundColor: '#ffffff',
+    borderRadius: 5,
   },
 }));
 

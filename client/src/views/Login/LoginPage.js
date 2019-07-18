@@ -22,6 +22,7 @@ export default function LoginPage(props) {
     mainContainer: {
       marginTop: '50px',
       textAlign: 'center',
+      alignItems: 'center',
       display: 'flex',
       flexDirection: 'row',
       [theme.breakpoints.down('xs')]: {
