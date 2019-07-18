@@ -44,7 +44,7 @@ export default function WikiList() {
       {!open && wikis && !isLoading ? (
         wikis.map(wiki => (
           <div key={wiki._id}>
-            <WikiItem wikis={wiki} />
+            <WikiItem update={handleOpen} wikis={wiki} />
           </div>
         ))
       ) : !open ? (

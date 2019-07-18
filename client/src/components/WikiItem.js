@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const WikiItem = ({ wikis }) => {
+const WikiItem = ({ wikis, update }) => {
   const classes = useStyles();
   const wikiContext = useContext(WikiContext);
   const { setCurrent, deleteWiki } = wikiContext;
@@ -27,6 +27,11 @@ const WikiItem = ({ wikis }) => {
 
   const onDelete = () => {
     deleteWiki(_id);
+  };
+
+  const onUpdate = () => {
+    setCurrent(wikis);
+    update();
   };
 
   return (
@@ -39,7 +44,7 @@ const WikiItem = ({ wikis }) => {
           className={classes.button}
           name="Edit"
           color="primary"
-          onClick={f => f}
+          onClick={onUpdate}
         />
         <DefaultButton name="Delete" color="secondary" onClick={onDelete} />
       </CardActions>

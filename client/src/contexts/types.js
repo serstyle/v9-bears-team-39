@@ -19,8 +19,9 @@ export const REMOVE_ALERT = 'REMOVE_ALERT';
 
 // Wikis
 
-export const GET_WIKIS= 'GET_WIKIS';
+export const GET_WIKIS = 'GET_WIKIS';
 export const ADD_WIKI = 'ADD_WIKI';
 export const SET_CURRENT = 'SET_CURRENT';
 export const WIKI_ERROR = 'WIKI_ERROR';
 export const DELETE_WIKI = 'DELETE_WIKI';
+export const UPDATE_WIKI = 'UPDATE_WIKI';
