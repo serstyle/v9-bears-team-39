@@ -16,6 +16,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import AccessibilityNew from '@material-ui/icons/AccessibilityNew';
+import Work from '@material-ui/icons/Work';
+import Directions from '@material-ui/icons/Directions';
+
+import Home from '@material-ui/icons/Home';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AuthContext from '../contexts/auth/authContext';
@@ -56,6 +61,9 @@ export default function ResponsiveDrawer(props) {
         width: `calc(100% - ${drawerWidth}px)`,
       },
     },
+    title: {
+      marginLeft: 10,
+    },
     menuButton: {
       marginRight: T.spacing(2),
       [T.breakpoints.up('sm')]: {
@@ -69,6 +77,17 @@ export default function ResponsiveDrawer(props) {
     },
     content: {
       flexGrow: 1,
+    },
+    icon: {
+      paddingRight: 10,
+    },
+    listItem: {
+      color: 'yellow',
+    },
+    underDev: {
+      color: 'yellow',
+      fontWeight: 'bold',
+      fontSize: 10,
     },
   }));
   const classes = useStyles();
@@ -97,14 +116,48 @@ export default function ResponsiveDrawer(props) {
         anchor="left"
       >
         <div className={classes.toolbar} />
-        <h2>Dashboard</h2>
+        <h2 className={classes.title}>Dashboard</h2>
         <Divider />
         <List>
           <ListItem button component={Link} to="dashboard">
+            <Home className={classes.icon} />
             <ListItemText primary="Home" />
           </ListItem>
           <ListItem button component={Link} to="/profile">
+            <AccountCircle className={classes.icon} />
             <ListItemText primary="My Account" />
+          </ListItem>
+          <ListItem style={{ marginTop: 20 }}>
+            <ListItemText className={classes.underDev}>
+              Under Developement
+            </ListItemText>
+          </ListItem>
+          <ListItem
+            button
+            className={classes.listItem}
+            component={Link}
+            to="/profile"
+          >
+            <Directions className={classes.icon} />
+            <ListItemText primary="My Roadmap" />
+          </ListItem>
+          <ListItem
+            button
+            className={classes.listItem}
+            component={Link}
+            to="/profile"
+          >
+            <AccessibilityNew className={classes.icon} />
+            <ListItemText primary="Dev Buddies" />
+          </ListItem>
+          <ListItem
+            button
+            className={classes.listItem}
+            component={Link}
+            to="/profile"
+          >
+            <Work className={classes.icon} />
+            <ListItemText primary="Courses" />
           </ListItem>
         </List>
       </Drawer>

@@ -108,7 +108,6 @@ const AuthState = props => {
         formData,
         config
       );
-      console.log(state.user.id);
       dispatch({
         type: PROFILE_UPDATED,
         payload: res.data,
