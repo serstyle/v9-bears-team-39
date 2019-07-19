@@ -1,11 +1,11 @@
 import React, { useEffect, useContext } from 'react';
-import DefaultButton from './DefaultButton';
-import AuthContext from '../contexts/auth/authContext';
-import WikiContext from '../contexts/wikis/wikiContext';
+import DefaultButton from '../DefaultButton';
+import AuthContext from '../../contexts/auth/authContext';
+import WikiContext from '../../contexts/wikis/wikiContext';
 import WikiItem from './WikiItem';
 
 import WikiEdit from './WikiEdit';
-import Preloader from './Preloader';
+import Preloader from '../Preloader';
 
 export default function WikiList() {
   const [open, setOpen] = React.useState(false);

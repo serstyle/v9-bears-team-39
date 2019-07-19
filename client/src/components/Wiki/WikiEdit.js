@@ -2,11 +2,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import marked from 'marked';
 import { makeStyles } from '@material-ui/core/styles';
-import FormTextField from './FormTextField';
-import SimpleTabs from './Tabs';
-import DefaultButton from './DefaultButton';
-import WikiContext from '../contexts/wikis/wikiContext';
-import AuthContext from '../contexts/auth/authContext';
+import FormTextField from '../FormTextField';
+import SimpleTabs from '../Tabs';
+import DefaultButton from '../DefaultButton';
+import WikiContext from '../../contexts/wikis/wikiContext';
+import AuthContext from '../../contexts/auth/authContext';
+import AlertContext from '../../contexts/alert/alertContext';
+import Alert from '../Alert';
 
 export default function WikiEdit(props) {
   const useStyles = makeStyles(() => ({
@@ -21,10 +23,12 @@ export default function WikiEdit(props) {
   const classes = useStyles();
 
   const wikiContext = useContext(WikiContext);
-  const { addWiki, setCurrent, current, updateWiki } = wikiContext;
+  const { addWiki, current, updateWiki } = wikiContext;
   const authContext = useContext(AuthContext);
   const { user } = authContext;
   const userid = user._id;
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
 
   const [wiki, setWiki] = useState({
     title: '',
@@ -42,7 +46,6 @@ export default function WikiEdit(props) {
       });
     }
   }, [wikiContext, current]);
-
   const { title, body } = wiki;
 
   const handleChange = name => e => {
@@ -53,11 +56,9 @@ export default function WikiEdit(props) {
     e.preventDefault();
     if (current === null) {
       addWiki(wiki);
-    } else {
-      updateWiki(wiki);
-    }
+      console.log(current);
+    } else if (wiki !== current) updateWiki(wiki);
     props.save();
-    console.log(wiki);
   };
 
   marked.setOptions({
@@ -76,6 +77,7 @@ export default function WikiEdit(props) {
   const { save } = props;
   return (
     <div>
+      <Alert />
       <FormTextField
         label="Wiki Title"
         variant="outlined"

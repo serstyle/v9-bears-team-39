@@ -4,8 +4,8 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import DefaultButton from './DefaultButton';
-import WikiContext from '../contexts/wikis/wikiContext';
+import DefaultButton from '../DefaultButton';
+import WikiContext from '../../contexts/wikis/wikiContext';
 
 const useStyles = makeStyles(theme => ({
   button: {

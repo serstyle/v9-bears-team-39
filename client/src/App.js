@@ -13,7 +13,7 @@ import WikiState from './contexts/wikis/WikiState';
 import setAuthToken from './utils/setAuthToken';
 import ProfilePage from './views/Profile/ProfilePage';
 import NavBar from './components/Navbar';
-import WikiEdit from './components/WikiEdit';
+import WikiEdit from './components/Wiki/WikiEdit';
 import PrivateRoute from './Routing/PrivateRoute';
 
 if (localStorage.token) {
@@ -25,20 +25,20 @@ function App() {
     <AuthState>
       <AlertState>
         <WikiState>
-        <ThemeContextProvider>
-          <BrowserRouter>
-            <NavBar />
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/note" component={Note} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/register-page" component={RegistrationPage} />
-              <Route path="/login-page" component={LoginPage} />
-              <PrivateRoute path="/new-wiki" component={WikiEdit} />
-              <PrivateRoute path="/profile" component={ProfilePage} />
-            </Switch>
-          </BrowserRouter>
-        </ThemeContextProvider>
+          <ThemeContextProvider>
+            <BrowserRouter>
+              <NavBar />
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/note" component={Note} />
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/register-page" component={RegistrationPage} />
+                <Route path="/login-page" component={LoginPage} />
+                <PrivateRoute path="/new-wiki" component={WikiEdit} />
+                <PrivateRoute path="/profile" component={ProfilePage} />
+              </Switch>
+            </BrowserRouter>
+          </ThemeContextProvider>
         </WikiState>
       </AlertState>
     </AuthState>
