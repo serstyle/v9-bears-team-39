@@ -10,7 +10,7 @@ import SimpleTabs from '../../components/Tabs';
 import TodoList from '../../components/TodoList';
 import Notes from '../../components/Note';
 
-import WikiList from '../../components/WikiList';
+import WikiList from '../../components/Wiki/WikiList';
 // context
 import AuthContext from '../../contexts/auth/authContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
@@ -18,7 +18,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 import useLoadUser from '../../hooks/useLoadUser';
 
 export default function Dashboard() {
-   const theme = useContext(ThemeContext);
+  const theme = useContext(ThemeContext);
   const useStyles = makeStyles(materialTheme => ({
     root: {
       flexGrow: 1,
@@ -38,7 +38,7 @@ export default function Dashboard() {
   const classes = useStyles();
   const authContext = useContext(AuthContext);
   const token = localStorage.getItem('token');
- 
+
   useLoadUser();
   return authContext.loading ? (
     <p>Loading ...</p>

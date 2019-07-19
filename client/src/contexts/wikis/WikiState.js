@@ -31,7 +31,7 @@ const WikiState = props => {
     } catch (err) {
       dispatch({
         type: WIKI_ERROR,
-        payload: err.response.msg,
+        payload: err.response.data.msg,
       });
     }
   };
@@ -55,7 +55,7 @@ const WikiState = props => {
     } catch (err) {
       dispatch({
         type: WIKI_ERROR,
-        payload: err.response.msg,
+        payload: err.response.data.msg,
       });
     }
   };
@@ -89,7 +89,7 @@ const WikiState = props => {
 
     try {
       const res = await axios.put(`/api/wikis/${wiki._id}`, wiki, config);
-
+      console.log(res);
       dispatch({
         type: UPDATE_WIKI,
         payload: res.data,
@@ -97,7 +97,7 @@ const WikiState = props => {
     } catch (err) {
       dispatch({
         type: WIKI_ERROR,
-        payload: err.response.msg,
+        payload: err.response.data.msg,
       });
     }
   };
@@ -105,7 +105,6 @@ const WikiState = props => {
   // Set Current Wiki
   const setCurrent = wikis => {
     dispatch({ type: SET_CURRENT, payload: wikis });
-    console.log(wikis);
   };
 
   // eslint-disable-next-line react/prop-types
