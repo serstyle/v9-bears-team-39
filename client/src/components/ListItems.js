@@ -21,12 +21,12 @@ const useStyles = makeStyles(theme => ({
   },
   item: {
     backgroundColor: 'yellow',
-    height: 100
+    height: 100,
   },
   text: {
     color: 'red',
-     backgroundColor: 'red',
-  }
+    backgroundColor: 'red',
+  },
 }));
 
 export default function CheckboxList(props) {
@@ -66,7 +66,7 @@ export default function CheckboxList(props) {
               }
               id={i}
               primary={value.title}
-              secondary={value.started}
+              secondary={value.started.slice(0, 10)}
             />
             {pending ? (
               <ListItemSecondaryAction>
@@ -74,9 +74,7 @@ export default function CheckboxList(props) {
               </ListItemSecondaryAction>
             ) : (
               /* Not todo */
-              <ListItemSecondaryAction
-                onClick={() => handleDelete(value._id)}
-              >
+              <ListItemSecondaryAction onClick={() => handleDelete(value._id)}>
                 <IconButton edge="end" aria-label="Delete">
                   <DeleteIcon />
                 </IconButton>
@@ -85,9 +83,15 @@ export default function CheckboxList(props) {
           </ListItem>
         ) : (
           <React.Fragment key={i}>
-            <ListItem className={classes.item} role={undefined} dense button onClick={handleToggle(i)}>
+            <ListItem
+              className={classes.item}
+              role={undefined}
+              dense
+              button
+              onClick={handleToggle(i)}
+            >
               <ListItemText
-              className={classes.text}
+                className={classes.text}
                 id={i}
                 primary={value.title}
                 secondary={value.body}

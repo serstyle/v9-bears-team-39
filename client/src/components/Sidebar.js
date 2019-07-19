@@ -179,7 +179,7 @@ export default function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Dev Dashboard
+            My Dashboard
           </Typography>
           <div>
             <IconButton

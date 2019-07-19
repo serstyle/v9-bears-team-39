@@ -7,8 +7,6 @@ import SimpleTabs from '../Tabs';
 import DefaultButton from '../DefaultButton';
 import WikiContext from '../../contexts/wikis/wikiContext';
 import AuthContext from '../../contexts/auth/authContext';
-import AlertContext from '../../contexts/alert/alertContext';
-import Alert from '../Alert';
 
 export default function WikiEdit(props) {
   const useStyles = makeStyles(() => ({
@@ -27,8 +25,6 @@ export default function WikiEdit(props) {
   const authContext = useContext(AuthContext);
   const { user } = authContext;
   const userid = user._id;
-  const alertContext = useContext(AlertContext);
-  const { setAlert } = alertContext;
 
   const [wiki, setWiki] = useState({
     title: '',
@@ -77,7 +73,6 @@ export default function WikiEdit(props) {
   const { save } = props;
   return (
     <div>
-      <Alert />
       <FormTextField
         label="Wiki Title"
         variant="outlined"

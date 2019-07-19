@@ -13,6 +13,11 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     marginTop: 20,
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
   },
   content: {
     marginTop: 5,
@@ -23,7 +28,8 @@ const WikiItem = ({ wikis, update }) => {
   const classes = useStyles();
   const wikiContext = useContext(WikiContext);
   const { setCurrent, deleteWiki } = wikiContext;
-  const { title, _id } = wikis;
+  const { title, _id, date } = wikis;
+  console.log(wikis);
 
   const onDelete = () => {
     deleteWiki(_id);
@@ -38,6 +44,7 @@ const WikiItem = ({ wikis, update }) => {
     <Card className={classes.card}>
       <CardContent className={classes.content}>
         <Typography variant="h5">{title}</Typography>
+        <Typography variant="body2">{date.slice(0, 10)}</Typography>
       </CardContent>
       <CardActions>
         <DefaultButton

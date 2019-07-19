@@ -12,6 +12,7 @@ const Alerts = () => {
       alignItems: 'center',
       justifyContent: 'center',
       color: 'white',
+      marginTop: '1rem',
     },
     success: {
       backgroundColor: theme.success,
