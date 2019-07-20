@@ -13,6 +13,10 @@ const NoteReducer = (state, action) => {
       return { ...state, isLoading: true };
     case 'GET_NOTES_SUCCESS':
       return { ...state, isLoading: false, notes: action.value };
+    case 'ADD_NOTE_SUCCESS':
+      return { ...state, notes: [action.value, ...state.notes] };
+    case 'DEL_NOTE_SUCCESS':
+      return { ...state, notes: action.value };
     default:
       return state;
   }
@@ -49,33 +53,45 @@ function Note(props) {
     fetchData();
   }, [token, user._id]);
 
-  // const addNote = async e => {
-  //   e.preventDefault();
-  //   console.log('trigger');
-  //   const data = await fetch('api/notes', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ title, body }),
-  //   });
-  //   const fetchNewNotes = data.json();
-  //   setNote(fetchNewNotes);
-  // };
+  const addNote = async (e, title, body) => {
+    e.preventDefault();
+    const userid = user._id;
+    console.log('trigger');
+    try {
+      const data = await fetch('api/notes', {
+        method: 'POST',
+        headers: {
+          'x-auth-token': token,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, body, userid }),
+      });
+      const fetchNewNotes = await data.json();
+      console.log(fetchNewNotes);
+      dispatch({ type: 'ADD_NOTE_SUCCESS', value: fetchNewNotes });
+    } catch (err) {}
+  };
 
-  // const delNote = async id => {
-  //   const data = await fetch(`api/notes/${id}`, {
-  //     method: 'DELETE',
-  //     headers: { 'Content-Type': 'application/json' },
-  //   });
-  //   const isSuccess = data.json();
-  //   return !isSuccess ? null : setNote({});
-  // };
+  const delNote = async id => {
+    console.log(id);
+    const data = await fetch(`api/notes/${id}`, {
+      method: 'DELETE',
+      headers: { 'x-auth-token': token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userid: user._id }),
+    });
+    const isSuccess = data.json();
+    if (isSuccess) {
+      const newNotes = state.notes.filter(e => e._id !== id);
+      dispatch({ type: 'DEL_NOTE_SUCCESS', value: newNotes });
+    }
+  };
 
   return (
     <>
-      <Modal button={classes.button} name="Add Note">
-        <MyNotesForm />
+      <Modal items={state.notes} button={classes.button} name="Add Note">
+        <MyNotesForm addNote={addNote} />
       </Modal>
-      <ListItems list={state.notes} />
+      <ListItems list={state.notes} handleDelete={delNote} />
     </>
   );
 }

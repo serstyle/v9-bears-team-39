@@ -96,6 +96,13 @@ export default function CheckboxList(props) {
                 primary={value.title}
                 secondary={value.body}
               />
+              <ListItemSecondaryAction
+                onClick={() => props.handleDelete(value._id)}
+              >
+                <IconButton edge="end" aria-label="Delete">
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
             </ListItem>
             {i !== list.length - 1 && <Divider light variant="middle" />}
           </React.Fragment>
