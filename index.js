@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const config = require('config');
+const config = require('config');
 const morgan = require('morgan');
 const path = require('path');
 const notes = require('./routes/api/notes');
@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 
 // eslint-disable-next-line no-bitwise
-const db = process.env.mongoURI;
+const db = process.env.mongoURI || config.get('mongoURI');
 app.use(morgan('combined'));
 // Connect to Mongo
 mongoose
