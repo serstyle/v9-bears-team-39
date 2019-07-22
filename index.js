@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const morgan = require('morgan');
+const path = require('path');
 const notes = require('./routes/api/notes');
 const todos = require('./routes/api/todos');
 const users = require('./routes/api/users');
@@ -13,7 +14,8 @@ const app = express();
 // Bodyparser Middleware
 app.use(express.json());
 
-const db = config.get('mongoURI');
+// eslint-disable-next-line no-bitwise
+const db = config.get('mongoURI') | process.env.mongoURI;
 app.use(morgan('combined'));
 // Connect to Mongo
 mongoose
@@ -32,6 +34,16 @@ app.use('/api/notes', notes);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/wikis', wikis);
+
+// Serve static assets if in production
+
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.listen(process.env.PORT || 5000, () => {
   console.log('server start');

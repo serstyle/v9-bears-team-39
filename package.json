@@ -8,7 +8,8 @@
     "start": "nodemon index.js",
     "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm start\" \" npm run client\""
+    "dev": "concurrently \"npm start\" \" npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.13",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -43,7 +45,6 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-hooks": "^1.6.0",
-    "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
   }
 }
