@@ -14,7 +14,8 @@ const app = express();
 // Bodyparser Middleware
 app.use(express.json());
 
-const db = config.get('mongoURI');
+// eslint-disable-next-line no-bitwise
+const db = config.get('mongoURI') | process.env.mongoURI;
 app.use(morgan('combined'));
 // Connect to Mongo
 mongoose
