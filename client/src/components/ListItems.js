@@ -19,14 +19,6 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
-  item: {
-    backgroundColor: 'yellow',
-    height: 100,
-  },
-  text: {
-    color: 'red',
-    backgroundColor: 'red',
-  },
 }));
 
 export default function CheckboxList(props) {

@@ -21,7 +21,7 @@ export default function WikiEdit(props) {
   const classes = useStyles();
 
   const wikiContext = useContext(WikiContext);
-  const { addWiki, current, updateWiki } = wikiContext;
+  const { addWiki, current, updateWiki, clearCurrent } = wikiContext;
   const authContext = useContext(AuthContext);
   const { user } = authContext;
   const userid = user._id;
@@ -48,12 +48,19 @@ export default function WikiEdit(props) {
     setWiki({ ...wiki, userid, [name]: e.target.value });
   };
 
+  const clearAll = () => {
+    clearCurrent();
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     if (current === null) {
-      addWiki(wiki);
       console.log(current);
-    } else if (wiki !== current) updateWiki(wiki);
+      addWiki(wiki);
+    } else {
+      updateWiki(wiki);
+    }
+    clearAll();
     props.save();
   };
 

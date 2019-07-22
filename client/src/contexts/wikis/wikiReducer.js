@@ -5,6 +5,7 @@ import {
   WIKI_ERROR,
   SET_CURRENT,
   UPDATE_WIKI,
+  CLEAR_CURRENT,
 } from '../types';
 
 export default (state, action) => {
@@ -32,14 +33,18 @@ export default (state, action) => {
     case DELETE_WIKI:
       return {
         ...state,
-        wikis: null,
-        error: null,
-        current: null,
+        wikis: state.wikis.filter(wiki => wiki._id !== action.payload),
+        isLoading: false,
       };
     case SET_CURRENT:
       return {
         ...state,
         current: action.payload,
+      };
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null,
       };
     case WIKI_ERROR:
       return {

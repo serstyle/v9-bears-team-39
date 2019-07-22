@@ -25,3 +25,4 @@ export const SET_CURRENT = 'SET_CURRENT';
 export const WIKI_ERROR = 'WIKI_ERROR';
 export const DELETE_WIKI = 'DELETE_WIKI';
 export const UPDATE_WIKI = 'UPDATE_WIKI';
+export const CLEAR_CURRENT = 'CLEAR_CURRENT';

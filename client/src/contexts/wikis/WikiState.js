@@ -8,6 +8,7 @@ import {
   UPDATE_WIKI,
   DELETE_WIKI,
   SET_CURRENT,
+  CLEAR_CURRENT,
   WIKI_ERROR,
 } from '../types';
 
@@ -107,6 +108,11 @@ const WikiState = props => {
     dispatch({ type: SET_CURRENT, payload: wikis });
   };
 
+  // Clear Current Wiki
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
+
   // eslint-disable-next-line react/prop-types
   const { children } = props;
   return (
@@ -119,6 +125,7 @@ const WikiState = props => {
         addWiki,
         deleteWiki,
         updateWiki,
+        clearCurrent,
         error: state.error,
       }}
     >

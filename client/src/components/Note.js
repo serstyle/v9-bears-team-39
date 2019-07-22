@@ -30,13 +30,14 @@ const noteState = {
 function Note(props) {
   const { token, user, theme } = props;
   const [state, dispatch] = useReducer(NoteReducer, noteState);
-  const useStyles = makeStyles(materialTheme => ({
+  const useStyles = makeStyles(() => ({
     button: {
       background: theme.secondary,
       color: 'white',
     },
   }));
   const classes = useStyles();
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'GET_NOTES_PENDING' });

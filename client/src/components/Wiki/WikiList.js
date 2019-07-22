@@ -31,6 +31,10 @@ export default function WikiList() {
     setOpen(true);
     setAlert('Updated Wiki successfully', 'success');
   };
+
+  const handleDelete = () => {
+    setAlert('Deleted Wiki successfully', 'success');
+  };
   const handleClose = () => {
     addWiki();
     setOpen(false);
@@ -56,7 +60,7 @@ export default function WikiList() {
       {!open && wikis && !isLoading ? (
         wikis.map(wiki => (
           <div key={wiki._id}>
-            <WikiItem update={handleUpdate} wikis={wiki} />
+            <WikiItem update={handleUpdate} del={handleDelete} wikis={wiki} />
           </div>
         ))
       ) : !open ? (

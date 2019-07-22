@@ -24,19 +24,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const WikiItem = ({ wikis, update }) => {
+const WikiItem = ({ wikis, update, del }) => {
   const classes = useStyles();
   const wikiContext = useContext(WikiContext);
   const { setCurrent, deleteWiki } = wikiContext;
   const { title, _id, date } = wikis;
-  console.log(wikis);
 
   const onDelete = () => {
     deleteWiki(_id);
+    del();
   };
 
   const onUpdate = () => {
     setCurrent(wikis);
+    console.log(wikis);
     update();
   };
 
