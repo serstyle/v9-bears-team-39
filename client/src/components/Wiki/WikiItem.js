@@ -44,7 +44,7 @@ const WikiItem = ({ wikis, update, del }) => {
   return (
     <Card className={classes.card}>
       <CardContent className={classes.content}>
-        <Typography variant="h5">{title}</Typography>
+        <Typography variant="h6">{title}</Typography>
         <Typography variant="body2">{date.slice(0, 10)}</Typography>
       </CardContent>
       <CardActions>
