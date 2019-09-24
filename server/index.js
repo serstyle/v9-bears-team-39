@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 
 // eslint-disable-next-line no-bitwise
-const db = config.get('mongoURI') | process.env.mongoURI;
+const db = config.get('mongoURI') || process.env.mongoURI;
 app.use(morgan('combined'));
 // Connect to Mongo
 mongoose
