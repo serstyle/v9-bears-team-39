@@ -23,7 +23,9 @@ const WikiState = props => {
   // Get Wikis
   const getWikis = async userid => {
     try {
-      const res = await axios.get(`/api/wikis/${userid}`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_PROVIDER}api/wikis/${userid}`
+      );
 
       dispatch({
         type: GET_WIKIS,
@@ -47,7 +49,11 @@ const WikiState = props => {
     };
 
     try {
-      const res = await axios.post(`/api/wikis`, wiki, config);
+      const res = await axios.post(
+        `${process.env.REACT_APP_PROVIDER}api/wikis`,
+        wiki,
+        config
+      );
 
       dispatch({
         type: ADD_WIKI,
