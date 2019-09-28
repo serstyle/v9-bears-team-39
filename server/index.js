@@ -28,7 +28,9 @@ mongoose
   .catch(err => console.log(err));
 
 // Routes
-
+app.get('/', (req, res) => {
+  res.send('ok');
+});
 app.use('/api/todos', todos);
 app.use('/api/notes', notes);
 app.use('/api/users', users);
