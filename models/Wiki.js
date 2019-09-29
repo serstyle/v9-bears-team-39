@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const NoteSchema = new Schema({
+const WikiSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'user',
@@ -22,6 +22,6 @@ const NoteSchema = new Schema({
   },
 });
 
-const Note = mongoose.model('note', NoteSchema);
+const Wiki = mongoose.model('wiki', WikiSchema);
 
-module.exports = Note;
+module.exports = Wiki;

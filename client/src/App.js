@@ -1,64 +1,47 @@
-import React, {useState, useEffect} from 'react';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import Note from './components/Note';
+import HomePage from './views/HomePage/HomePage';
+import RegistrationPage from './views/Registration/RegistrationPage';
+import LoginPage from './views/Login/LoginPage';
+import Dashboard from './views/Dashboard/Dashboard';
+import ThemeContextProvider from './contexts/ThemeContext';
+import AuthState from './contexts/auth/AuthState';
+import AlertState from './contexts/alert/AlertState';
+import WikiState from './contexts/wikis/WikiState';
+import setAuthToken from './utils/setAuthToken';
+import ProfilePage from './views/Profile/ProfilePage';
+import NavBar from './components/Navbar';
+import WikiEdit from './components/Wiki/WikiEdit';
+import PrivateRoute from './Routing/PrivateRoute';
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
-  const [notes, setNotes] = useState([])
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
-  const [note, setNote] = useState({})
-
-  // componentDidmount / didUpdate
-  useEffect(()=>{
-    const fetchData = async () => {
-      const data = await fetch('/api/notes')
-      const fetchNotes = await data.json()
-      setNotes(fetchNotes)
-    }
-    fetchData()
-  }, [note])
-  
-  // I don't know if it s good practice to do that
-  const addNote = async (e) => {
-    e.preventDefault()
-    console.log('trigger')
-    const data = await fetch('api/notes', {
-      method:"POST",
-      headers:{'Content-Type': 'application/json'},
-      body: JSON.stringify({'title':title, 'body':body})
-    })
-    const fetchNewNotes = data.json()
-    setNote(fetchNewNotes)
-  }
-
-  const delNote = async (id) => {
-    const data = await fetch(`api/notes/${id}`, {
-      method:"DELETE",
-      headers:{'Content-Type': 'application/json'}
-    })
-    const isSuccess = data.json()
-    return !isSuccess ? null : setNote({})
-  }
-
   return (
-    <div className="App">
-      <h1>Hello</h1>
-      <form onSubmit={addNote}>
-        <input placeholder='title' onChange={e=> 
-          setTitle(e.target.value)}/>
-        <input placeholder='body' onChange={e=> setBody(e.target.value)}/>
-        <input type='submit' />
-      </form>
-     {notes.map(note => {
-       let id = note._id
-       return(
-         <div key={id}>
-          <h2>{note.title}</h2>
-          <p>{note.body}</p>
-          <button onClick={() => delNote(id)}>X</button>
-         </div>
-       )
-     })}
-    </div>
+    <AuthState>
+      <AlertState>
+        <WikiState>
+          <ThemeContextProvider>
+            <BrowserRouter>
+              <NavBar />
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/note" component={Note} />
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/register-page" component={RegistrationPage} />
+                <Route path="/login-page" component={LoginPage} />
+                <PrivateRoute path="/new-wiki" component={WikiEdit} />
+                <PrivateRoute path="/profile" component={ProfilePage} />
+              </Switch>
+            </BrowserRouter>
+          </ThemeContextProvider>
+        </WikiState>
+      </AlertState>
+    </AuthState>
   );
 }
 
