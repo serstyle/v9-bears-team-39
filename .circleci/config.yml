@@ -5,12 +5,7 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-<<<<<<< HEAD
       - run: cd client && npm run build
-=======
-      - run: cd ./client
-      - run: npm run build
->>>>>>> 154f5d318482dd9ac3b68bf4fc80c2f3480560a0
   test-front:
     docker:
       - image: circleci/node:latest
