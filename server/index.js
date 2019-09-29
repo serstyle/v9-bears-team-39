@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const morgan = require('morgan');
+const cors = require('cors');
 const path = require('path');
 const notes = require('./routes/api/notes');
 const todos = require('./routes/api/todos');
@@ -10,7 +11,11 @@ const auth = require('./routes/api/auth');
 const wikis = require('./routes/api/wikis');
 
 const app = express();
-
+const corsOptions = {
+  origin: 'https://dev-resources-1337.netlify.com',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 // Bodyparser Middleware
 app.use(express.json());
 

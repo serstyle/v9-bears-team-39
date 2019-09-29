@@ -42,7 +42,7 @@ function Note(props) {
     const fetchData = async () => {
       dispatch({ type: 'GET_NOTES_PENDING' });
       const data = await fetch(
-        `${process.env.REACT_APP_PROVIDER}/api/notes/${user._id}`,
+        `${process.env.REACT_APP_PROVIDER}api/notes/${user._id}`,
         {
           method: 'GET',
           headers: {
