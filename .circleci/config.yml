@@ -3,9 +3,9 @@ jobs:
   build-front:
     docker:
       - image: circleci/node:latest
-    working_directory: ./client
     steps:
       - checkout
+      - run: cd ./client
       - run: npm run build
   test-front:
     docker:
