@@ -66,7 +66,7 @@ export default function SimpleTabs(props) {
   // FETCH DATA
   useEffect(() => {
     dispatch({ type: 'GET_TODO_PENDING' });
-    fetch(`/api/todos/${userid}`, {
+    fetch(`${process.env.REACT_APP_PROVIDER}api/todos/${userid}`, {
       method: 'GET',
       headers: {
         'x-auth-token': token,
@@ -83,7 +83,7 @@ export default function SimpleTabs(props) {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch({ type: 'HANDLE_SUBMIT_PENDING' });
-    fetch(`/api/todos/`, {
+    fetch(`${process.env.REACT_APP_PROVIDER}api/todos/`, {
       method: 'POST',
       headers: {
         'x-auth-token': token,
@@ -100,7 +100,7 @@ export default function SimpleTabs(props) {
   };
   const handleDelete = id => {
     dispatch({ type: 'HANDLE_DELETE_PENDING' });
-    fetch(`/api/todos/${id}`, {
+    fetch(`${process.env.REACT_APP_PROVIDER}api/todos/${id}`, {
       method: 'DELETE',
       headers: {
         'x-auth-token': token,

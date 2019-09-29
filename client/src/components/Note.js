@@ -41,13 +41,16 @@ function Note(props) {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'GET_NOTES_PENDING' });
-      const data = await fetch(`/api/notes/${user._id}`, {
-        method: 'GET',
-        headers: {
-          'x-auth-token': token,
-          'Content-Type': 'application/json',
-        },
-      });
+      const data = await fetch(
+        `${process.env.REACT_APP_PROVIDER}api/notes/${user._id}`,
+        {
+          method: 'GET',
+          headers: {
+            'x-auth-token': token,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       const fetchNotes = await data.json();
       dispatch({ type: 'GET_NOTES_SUCCESS', value: fetchNotes });
     };
@@ -59,7 +62,7 @@ function Note(props) {
     const userid = user._id;
     console.log('trigger');
     try {
-      const data = await fetch('api/notes', {
+      const data = await fetch(`${process.env.REACT_APP_PROVIDER}api/notes`, {
         method: 'POST',
         headers: {
           'x-auth-token': token,
@@ -75,11 +78,14 @@ function Note(props) {
 
   const delNote = async id => {
     console.log(id);
-    const data = await fetch(`api/notes/${id}`, {
-      method: 'DELETE',
-      headers: { 'x-auth-token': token, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userid: user._id }),
-    });
+    const data = await fetch(
+      `${process.env.REACT_APP_PROVIDER}api/notes/${id}`,
+      {
+        method: 'DELETE',
+        headers: { 'x-auth-token': token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userid: user._id }),
+      }
+    );
     const isSuccess = data.json();
     if (isSuccess) {
       const newNotes = state.notes.filter(e => e._id !== id);

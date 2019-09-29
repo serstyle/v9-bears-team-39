@@ -1,50 +1,32 @@
 {
-  "name": "v9-bears-team-39",
-  "version": "1.0.0",
-  "description": "Add-project-description-here | Voyage-9 | https://chingu.io/",
-  "main": "index.js",
-  "scripts": {
-    "client-install": "npm install --prefix client",
-    "start": "nodemon index.js",
-    "client": "npm start --prefix client",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm start\" \" npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/serstyle/v9-bears-team-39.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/serstyle/v9-bears-team-39/issues"
-  },
-  "homepage": "https://github.com/serstyle/v9-bears-team-39#readme",
-  "dependencies": {
-    "@material-ui/core": "^4.0.0-rc.0",
-    "axios": "^0.19.0",
-    "bcryptjs": "^2.4.3",
-    "concurrently": "^4.1.0",
-    "config": "^3.1.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.5.13",
-    "morgan": "^1.9.1",
-    "nodemon": "^1.19.1"
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-config-wesbos": "0.0.19",
-    "eslint-plugin-html": "^5.0.5",
-    "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.13.0",
-    "eslint-plugin-react-hooks": "^1.6.0",
-    "prettier": "^1.18.2"
+    "name": "v9-bears-team-39",
+    "version": "1.0.0",
+    "description": "Add-project-description-here | Voyage-9 | https://chingu.io/",
+    "main": "index.js",
+    "scripts": {
+      "client-install": "npm install --prefix client",
+      "server-install": "npm install --prefix server",
+      "server": "npm run dev --prefix server",
+      "client": "npm start --prefix client",
+      "client:test": "npm run test --prefix client",
+      "test": "concurrently \"npm run server\" \" npm run client\"",
+      "dev": "concurrently \"npm run server\" \" npm run client\"",
+      "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/serstyle/v9-bears-team-39.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/serstyle/v9-bears-team-39/issues"
+    },
+    "homepage": "https://github.com/serstyle/v9-bears-team-39#readme",
+    "dependencies": {
+    },
+    "devDependencies": {
+        "concurrently": "^4.1.0"
+    }
   }
-}
+  
