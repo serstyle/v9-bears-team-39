@@ -19,6 +19,7 @@ jobs:
     steps:
       - checkout
       - run: npm run client-install
+      - run: cd client && npm run
       - run:
           name: Install netlify-cli
           command: sudo npm install -g --silent netlify-cli
