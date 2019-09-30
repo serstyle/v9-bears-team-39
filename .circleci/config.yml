@@ -14,7 +14,8 @@ jobs:
       - checkout
       - run: echo "test"
   deploy:
-    executor: node
+    docker:
+      - image: circleci/node:latest
     steps:
       - checkout
       - run: npm run client-install
