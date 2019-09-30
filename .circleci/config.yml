@@ -1,25 +1,12 @@
 version: 2
 jobs:
-  build-front:
-    docker:
-      - image: circleci/node:latest
-    steps:
-      - checkout
-      - run: cd client && npm install
-      - run: cd client && npm run build
-  test-front:
-    docker:
-      - image: circleci/node:latest
-    steps:
-      - checkout
-      - run: echo "test"
   deploy:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
       - run: npm run client-install
-      - run: cd client && npm run
+      - run: cd client && npm run build
       - run:
           name: Install netlify-cli
           command: sudo npm install -g --silent netlify-cli
@@ -30,11 +17,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build-front
-      - test-front
       - deploy:
-          requires:
-            - build-front
           filters:
             branches:
               only: master
