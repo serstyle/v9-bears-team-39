@@ -13,9 +13,26 @@ jobs:
     steps:
       - checkout
       - run: echo "test"
+  deploy:
+    executor: node
+    steps:
+      - checkout
+      - run: npm run client-install
+      - run:
+          name: Install netlify-cli
+          command: sudo npm install -g --silent netlify-cli
+      - run:
+          name: Deploy to Netlify
+          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=./client/public
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build-front
       - test-front
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
