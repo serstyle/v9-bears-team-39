@@ -32,7 +32,7 @@ workflows:
       - test-front
       - deploy:
           requires:
-            - build
+            - build-front
           filters:
             branches:
               only: master
