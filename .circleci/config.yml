@@ -22,7 +22,7 @@ jobs:
           command: cd client && netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
   deploy-back:
     docker: 
-      - image: circleci/node:latest
+      - image: machine
     steps:
       - checkout
       - run: docker build -t backend-dev server
