@@ -1,5 +1,12 @@
 version: 2
 jobs:
+  build-front:
+    docker:
+      - image: circleci/node:latest
+    steps: 
+      - checkout
+      - npm run client-install 
+      - run: cd client && npm run build
   deploy:
     docker:
       - image: circleci/node:latest
@@ -15,9 +22,12 @@ jobs:
           command: cd client && netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
 workflows:
   version: 2
-  build_and_test:
+  build_and_depoy:
     jobs:
+      - build-front
       - deploy:
+          requires:
+            - build-front
           filters:
             branches:
               only: master
