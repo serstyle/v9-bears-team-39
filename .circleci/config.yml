@@ -35,14 +35,14 @@ workflows:
   version: 2
   build_and_depoy:
     jobs:
+      - deploy-back:
+          filters:
+              branches:
+                only: master
       - build-front
       - deploy-front:
           requires:
             - build-front
           filters:
-            branches:
-              only: master
-      - deploy-back:
-        filters:
             branches:
               only: master
