@@ -20,7 +20,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // eslint-disable-next-line no-bitwise
-const db = config.get('mongoURI') || process.env.mongoURI;
+const db = process.env.mongoURI || config.get('mongoURI');
 app.use(morgan('combined'));
 // Connect to Mongo
 mongoose
