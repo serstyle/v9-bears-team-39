@@ -21,8 +21,8 @@ jobs:
           name: Deploy to Netlify
           command: cd client && netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
   deploy-back:
-    docker: 
-      - image: ubuntu-1604:201903-01
+    machine: 
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run: docker build -t backend-dev server
