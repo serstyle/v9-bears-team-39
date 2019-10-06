@@ -31,7 +31,14 @@ jobs:
             echo $HEROKU_API_KEY | docker login --username=$HEROKU_USERNAME --password-stdin registry.heroku.com
             docker tag backend-dev registry.heroku.com/$HEROKU_APP_NAME/web
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
-            sudo npm install -g --silent heroku
+      - run:
+          name: Setup Heroku
+          command: |
+            chmod +x .circleci/setup-heroku.sh
+            .circleci/setup-heroku.sh
+      - run:
+          name: Deploy to Heroku
+          command: |
             heroku container:release web --app $HEROKU_APP_NAME
 workflows:
   version: 2
