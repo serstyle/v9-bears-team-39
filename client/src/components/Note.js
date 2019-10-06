@@ -73,7 +73,9 @@ function Note(props) {
       const fetchNewNotes = await data.json();
       console.log(fetchNewNotes);
       dispatch({ type: 'ADD_NOTE_SUCCESS', value: fetchNewNotes });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const delNote = async id => {

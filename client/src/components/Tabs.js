@@ -36,7 +36,15 @@ export default function SimpleTabs(props) {
   function handleChange(event, newValue) {
     setValue(newValue);
   }
-  const { label1, label2, label3, container1, container2, container3, className } = props;
+  const {
+    label1,
+    label2,
+    label3,
+    container1,
+    container2,
+    container3,
+    className,
+  } = props;
   return (
     <div className={className}>
       <AppBar position="static" className={classes.appbar}>
