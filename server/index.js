@@ -34,7 +34,7 @@ mongoose
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('ok');
+  res.send('ok!');
 });
 app.use('/api/todos', todos);
 app.use('/api/notes', notes);
